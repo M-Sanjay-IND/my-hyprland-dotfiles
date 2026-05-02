@@ -6,8 +6,10 @@ Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin
 
 ## Preview
 
-![macchiato](screenshots/macchiato.png)
-![matrix](screenshots/matrix.png)
+<p>
+  <img src="screenshots/macchiato.png" width="49%"/>
+  <img src="screenshots/matrix.png" width="49%"/>
+</p>
 
 ---
 
@@ -78,7 +80,7 @@ The wallpaper picker (`Super + W`) opens a Rofi gallery. You can also set a rand
 
 ## Keybinds
 
-A cheatsheet overlay is available at any time with `Super + F1`. All bindings are defined in `hyprland/conf/keybinds.conf`.
+A cheatsheet overlay is available at any time with `Super + I`. All bindings are defined in `hyprland/conf/keybinds.conf`.
 
 ---
 
