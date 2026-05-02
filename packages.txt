@@ -1,0 +1,124 @@
+# packages.txt
+# Explicitly installed packages for this rice.
+# Assumes a base Arch install (base, linux, grub, networkmanager, sudo already present).
+# Hardware-specific packages (intel-ucode, intel-media-driver) not included — install as needed.
+# For hacking tools see packages-blackarch.txt
+
+# display manager
+sddm
+sddm-catppuccin-git
+
+# wayland / wm
+hyprland
+uwsm
+xdg-desktop-portal-hyprland
+hypridle
+hyprlock
+hyprpicker
+awww
+
+# bar / notifications / launcher
+waybar
+swaync
+rofi
+rofi-calc
+rofi-emoji
+wlogout
+grimblast-git
+wtype
+swappy
+
+# terminal / shell
+kitty
+zsh
+zsh-autosuggestions
+zsh-completions
+zsh-syntax-highlighting
+zsh-theme-powerlevel10k-git
+
+# audio
+pipewire
+wireplumber
+alsa-utils
+pamixer
+pulsemixer
+pavucontrol
+easyeffects
+cava
+
+# theming
+nwg-look
+kvantum
+kvantum-theme-catppuccin-git
+qt5ct
+qt6ct
+qt5-wayland
+qt6-wayland
+capitaine-cursors
+vimix-cursors
+
+# fonts
+ttf-jetbrains-mono-nerd
+ttf-firacode-nerd
+ttf-cascadia-code-nerd
+ttf-cascadia-mono-nerd
+ttf-iosevka-nerd
+ttf-iosevkaterm-nerd
+ttf-fira-mono
+ttf-fira-sans
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono
+noto-fonts-emoji
+
+# file manager / utils
+yazi
+cliphist
+gvfs
+gvfs-mtp
+7zip
+unrar
+imv
+ncdu
+tree
+lsof
+iotop
+brightnessctl
+
+# bluetooth
+bluez-utils
+bluetuith
+blueman
+
+# networking
+openvpn
+ufw
+openbsd-netcat
+
+# editors
+neovim
+vim
+ex-vi-compat
+lazygit
+
+# apps
+firefox
+discord
+spotify-launcher
+mpv
+gimp
+libreoffice-fresh
+remmina
+zathura
+
+# terminal fun
+btop
+fastfetch
+figlet
+cmatrix
+
+# misc
+pacman-contrib
+yay
+git
+polkit-kde-agent
+hunspell-it
