@@ -35,30 +35,20 @@ Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin
 
 ## Installation
 
-> Arch Linux only. The script assumes a base bootable system with Hyprland and Kitty installed.
+> Arch Linux only. Assumes a base bootable system with Hyprland and Kitty already installed.
 
-```bash
-git clone https://github.com/Kernel236/my-hyprland-dotfiles
-cd my-hyprland-dotfiles
-./install.sh
-```
+At the moment there is no automated install script. To replicate this setup manually:
 
-The installer will:
-- install all required packages via pacman or yay
-- symlink configs to the correct XDG paths
-- extract and install the icon pack and GTK theme
-- copy scripts to `~/.local/bin/`
-- optionally add the BlackArch repository
+1. Install the packages listed in `packages.txt` via pacman / yay
+2. Copy each config folder to the corresponding path in `~/.config/`
+3. Copy the scripts in `scripts/` to `~/.local/bin/` and make them executable
+4. Extract `assets/icons/Tela-circle-dracula.tar.xz` to `~/.local/share/icons/`
+5. Extract `assets/themes/Catppuccin-Mocha.tar.xz` to `~/.local/share/themes/`
+6. Log out and back in
 
-### BlackArch (optional)
+To add the BlackArch repository (optional), follow the official instructions at https://blackarch.org/downloads.html#install-repo
 
-During installation you will be prompted:
-
-```
-Add BlackArch repository? [y/N]
-```
-
-If you answer yes, the official BlackArch strap script will be downloaded and run. This adds the full BlackArch package repository without converting your system. It coexists cleanly with a standard Arch install. You can skip this and add it later at any time.
+An automated install script is planned for a future release.
 
 ---
 
