@@ -1,12 +1,13 @@
 # my-hyprland-dotfiles
 
-Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin Mocha, daily use) and **matrix** (green-on-black, for when the mood calls for it). Theme switching is live — one click in the bar and every component updates without restarting anything.
+Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin Mocha, daily use) and **matrix** (red-on-black, for when the mood calls for it). Theme switching is live with  one click in the bar or shortcut from keyboard and every component updates without restarting anything.
 
 ---
 
 ## Preview
 
-<!-- screenshots here -->
+![macchiato](screenshots/20260502_133027.png)
+![matrix](screenshots/20260502_133152.png)
 
 ---
 
@@ -34,16 +35,16 @@ Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin
 
 ## Installation
 
-> Arch Linux only. The script assumes a base system with Hyprland already bootable.
+> Arch Linux only. The script assumes a base bootable system with Hyperland and Kitty installed.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/my-hyprland-dotfiles
+git clone https://github.com/kernel236/my-hyprland-dotfiles
 cd my-hyprland-dotfiles
 ./install.sh
 ```
 
 The installer will:
-- install all required packages via pacman
+- install all required packages via pacman or yay
 - symlink configs to the correct XDG paths
 - extract and install the icon pack and GTK theme
 - copy scripts to `~/.local/bin/`
@@ -57,7 +58,7 @@ During installation you will be prompted:
 Add BlackArch repository? [y/N]
 ```
 
-If you answer yes, the official BlackArch strap script will be downloaded and run. This adds the full BlackArch package repository without converting your system — it coexists cleanly with a standard Arch install. You can skip this and add it later at any time.
+If you answer yes, the official BlackArch strap script will be downloaded and run. This adds the full BlackArch package repository without converting your system. It coexists cleanly with a standard Arch install. You can skip this and add it later at any time.
 
 ---
 
