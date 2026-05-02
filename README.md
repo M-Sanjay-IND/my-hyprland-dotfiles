@@ -35,10 +35,10 @@ Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin
 
 ## Installation
 
-> Arch Linux only. The script assumes a base bootable system with Hyperland and Kitty installed.
+> Arch Linux only. The script assumes a base bootable system with Hyprland and Kitty installed.
 
 ```bash
-git clone https://github.com/kernel236/my-hyprland-dotfiles
+git clone https://github.com/Kernel236/my-hyprland-dotfiles
 cd my-hyprland-dotfiles
 ./install.sh
 ```
