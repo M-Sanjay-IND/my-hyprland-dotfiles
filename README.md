@@ -6,8 +6,8 @@ Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin
 
 ## Preview
 
-![macchiato](screenshots/20260502_133027.png)
-![matrix](screenshots/20260502_133152.png)
+![macchiato](screenshots/macchiato.png)
+![matrix](screenshots/matrix.png)
 
 ---
 
