@@ -3,3 +3,6 @@
 *.swo
 *~
 .DS_Store
+.claude/
+.codex
+.current_wallpaper
