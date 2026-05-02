@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# rofi-clipboard — custom mode rofi che bridge cliphist <-> wl-copy.
+#
+# Quando rofi lancia uno "script mode", invoca lo script:
+#   - SENZA argomenti al primo lancio  → deve stampare la lista delle voci
+#   - CON argomento (la riga scelta)   → deve eseguire l'azione, output ignorato
+#
+# Variabili rofi disponibili:
+#   ROFI_RETV=0  → primo lancio (lista)
+#   ROFI_RETV=1  → utente ha selezionato una voce
+#
+# Riferimento: man rofi-script
+
+set -euo pipefail
+
+if [[ -z "${1:-}" ]]; then
+    # Primo lancio: ritorna lista cliphist (id<TAB>preview)
+    cliphist list
+else
+    # Voce selezionata: decodifica e copia in clipboard Wayland
+    printf '%s' "$1" | cliphist decode | wl-copy
+fi

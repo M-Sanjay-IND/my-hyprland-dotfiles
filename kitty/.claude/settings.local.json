@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:wiki.archlinux.org)",
+      "WebFetch(domain:wiki.hyprland.org)",
+      "WebFetch(domain:wiki.hypr.land)",
+      "WebSearch",
+      "WebFetch(domain:sw.kovidgoyal.net)"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wlogout --version)",
+      "Bash(hyprctl clients *)",
+      "Bash(python3 -c \"import json,sys; [print\\(f'{c[\\\\\"class\\\\\"]:40} title={c[\\\\\"title\\\\\"][:50]}'\\) for c in json.load\\(sys.stdin\\)]\")",
+      "Bash(pacman -Q ttf-jetbrains-mono-nerd nerd-fonts)",
+      "Bash(fc-list)",
+      "Bash(python3)",
+      "Bash(python3 -c ' *)",
+      "Bash(chmod +x /home/kernel_x23_6/.config/waybar/scripts/theme-status.sh /home/kernel_x23_6/.config/waybar/scripts/theme-switch.sh)",
+      "Bash(bash /home/kernel_x23_6/.config/waybar/scripts/theme-status.sh)",
+      "Bash(/home/kernel_x23_6/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/scripts/start-server.sh --project-dir /home/kernel_x23_6/.config/waybar)",
+      "Bash(/home/kernel_x23_6/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh --project-dir /home/kernel_x23_6/.config/waybar)",
+      "Bash(chmod +x /home/kernel_x23_6/.config/waybar/scripts/active-ip.sh)",
+      "Bash(bash /home/kernel_x23_6/.config/waybar/scripts/active-ip.sh)",
+      "Bash(xxd /home/kernel_x23_6/.config/waybar/scripts/active-ip.sh)",
+      "WebFetch(domain:www.fileformat.info)",
+      "WebSearch",
+      "Bash(echo \"exit:$?\")",
+      "Bash(ln -sf /home/kernel_x23_6/.config/fastfetch/config-macchiato.jsonc /home/kernel_x23_6/.config/fastfetch/config.jsonc)",
+      "Bash(fastfetch --config /home/kernel_x23_6/.config/fastfetch/config-macchiato.jsonc)"
+    ]
+  }
+}

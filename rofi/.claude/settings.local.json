@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(systemctl --user list-units)",
+      "Bash(chmod +x *)",
+      "Bash(wlogout --help)",
+      "Bash(wlogout --version)",
+      "Bash(GTK_DEBUG=css wlogout -p layer-shell -C /home/kernel_x23_6/.config/wlogout/style.css -l /home/kernel_x23_6/.config/wlogout/layout -b 5)",
+      "Bash(kill %1)",
+      "Bash(fastfetch --logo-type kitty --logo /home/kernel_x23_6/.config/assets/backgrounds/my-avatar.png --logo-width 30)",
+      "Bash(fastfetch --list-features)",
+      "Bash(fastfetch --version)",
+      "Bash(fastfetch --list-logos)",
+      "Bash(fastfetch --logo-type kitty-direct --logo /home/kernel_x23_6/.config/assets/backgrounds/my-avatar.png --logo-width 25 --logo-height 20)",
+      "Bash(echo \"exit: $?\")",
+      "Read(//etc/**)",
+      "Read(//etc/sddm.conf.d/**)",
+      "Read(//usr/share/sddm/themes/**)",
+      "Bash(grep -r '$menu\\\\|$terminal\\\\|$browser' /home/kernel_x23_6/.config/hypr/)",
+      "Bash(grep -v \"^\\\\.claude$\\\\|^\\\\.current\")",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(hyprctl clients *)",
+      "Bash(fc-list)",
+      "Bash(bash -x ~/.config/waybar/scripts/theme-switch.sh matrix)",
+      "Bash(awww img *)",
+      "Bash(ln -sf themes/macchiato.conf ~/.config/kitty/theme.conf)",
+      "Bash(ln -sf colors-macchiato.rasi ~/.config/rofi/colors.rasi)"
+    ]
+  }
+}
