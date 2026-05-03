@@ -71,7 +71,7 @@ Wallpapers are split by theme in `assets/backgrounds/`:
 - `whitehat/` — used with macchiato (anime, landscapes, Studio Ghibli)
 - `blackhat/` — used with matrix (dark Arch, Uchiha, BlackArch)
 
-The wallpaper picker (`Super + W`) opens a Rofi gallery. You can also set a random wallpaper from the current theme's folder automatically on login.
+The wallpaper picker (`Super + SHIFT + W`) opens a Rofi gallery. You can also set a random wallpaper from the current theme's folder automatically on login.
 
 ---
 
