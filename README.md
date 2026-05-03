@@ -43,7 +43,11 @@ At the moment there is no automated install script. To replicate this setup manu
 3. Copy the scripts in `scripts/` to `~/.local/bin/` and make them executable
 4. Extract `assets/icons/Tela-circle-dracula.tar.xz` to `~/.local/share/icons/`
 5. Extract `assets/themes/Catppuccin-Mocha.tar.xz` to `~/.local/share/themes/`
-6. Log out and back in
+6. Replace all occurrences of `kernel_x23_6` with your own username across the config files:
+   ```bash
+   grep -rl 'kernel_x23_6' ~/.config/hypr ~/.config/waybar ~/.config/rofi | xargs sed -i 's/kernel_x23_6/YOUR_USERNAME/g'
+   ```
+7. Log out and back in
 
 To add the BlackArch repository (optional), follow the official instructions at https://blackarch.org/downloads.html#install-repo
 
