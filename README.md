@@ -98,5 +98,5 @@ my-hyprland-dotfiles/
 ├── wlogout/        logout screen layout and icons
 ├── btop/           system monitor config
 ├── assets/         wallpapers, icon pack, GTK theme archive
-└── scripts/        rofi-launcher, rofi-clipboard, rofi-wallpaper
+└── scripts/        rofi-launcher, rofi-wallpaper, rofi-clipboard (rofi custom mode for cliphist)
 ```
