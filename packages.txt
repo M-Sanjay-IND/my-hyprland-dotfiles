@@ -4,6 +4,8 @@
 # Hardware-specific packages (intel-ucode, intel-media-driver) not included — install as needed.
 # For hacking tools see packages-blackarch.txt
 
+# Uwsm needs to be set up as per Arch wiki documentation.
+
 # display manager
 sddm
 sddm-catppuccin-git
@@ -90,7 +92,6 @@ bluetuith
 blueman
 
 # networking
-openvpn
 ufw
 openbsd-netcat
 
