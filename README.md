@@ -34,25 +34,29 @@ Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin
 
 ## Installation
 
-> Arch Linux only. Assumes a base bootable system with Hyprland and Kitty already installed.
+> Arch Linux only. Assumes a base Arch install with internet access.
 
-At the moment there is no automated install script. To replicate this setup manually:
-
-1. Install the packages listed in `packages.txt` via pacman / yay
-2. Copy each config folder to the corresponding path in `~/.config/`
-3. Copy the scripts in `scripts/` to `~/.local/bin/` and make them executable
-4. Extract `assets/icons/Tela-circle-dracula.tar.xz` to `~/.local/share/icons/`
-5. Extract `assets/themes/Catppuccin-Mocha.tar.xz` to `~/.local/share/themes/`
-6. The Hyprland config uses `os.getenv("HOME")` for all paths — no username replacement needed.
-   Check `hyprlock.conf` and `waybar/scripts/theme-switch.sh` for any remaining hardcoded paths:
+1. Clone the repo into your home directory:
    ```bash
-   grep -r 'kernel_x23_6' ~/.config/ 2>/dev/null
+   git clone https://github.com/YOUR_USERNAME/my-hyprland-dotfiles ~/my-hyprland-dotfiles
    ```
-7. Log out and back in
+
+2. Run the installer:
+   ```bash
+   cd ~/my-hyprland-dotfiles
+   bash install.sh
+   ```
+   The installer checks for missing packages, creates symlinks from `~/.config/` into the repo,
+   extracts the icon pack and GTK theme, and initializes the macchiato theme.
+
+3. Log out and back in, then start Hyprland:
+   ```bash
+   uwsm start hyprland
+   ```
+
+Any future edit to the repo is reflected immediately — symlinks keep `~/.config/` in sync with the repo.
 
 To add the BlackArch repository (optional), follow the official instructions at https://blackarch.org/downloads.html#install-repo
-
-An automated install script is planned for a future release.
 
 ---
 
@@ -82,7 +86,7 @@ The wallpaper picker (`Super + SHIFT + W`) opens a Rofi gallery. You can also se
 
 ## Keybinds
 
-A cheatsheet overlay is available at any time with `Super + I`. All bindings are defined in `hyprland/conf/keybinds.lua`.
+A cheatsheet overlay is available at any time with `Super + I`. All bindings are defined in `.config/hypr/conf/keybinds.lua`.
 
 ---
 
@@ -90,14 +94,20 @@ A cheatsheet overlay is available at any time with `Super + I`. All bindings are
 
 ```
 my-hyprland-dotfiles/
-├── hyprland/       config, themes, scripts
-├── waybar/         bar config, per-module CSS, scripts, themes
-├── kitty/          terminal config and themes
-├── swaync/         notification center config and themes
-├── rofi/           launcher, wallpaper picker, themes
-├── fastfetch/      per-theme fetch configs
-├── wlogout/        logout screen layout and icons
-├── btop/           system monitor config
-├── assets/         wallpapers, icon pack, GTK theme archive
-└── scripts/        rofi-launcher, rofi-wallpaper, rofi-clipboard (rofi custom mode for cliphist)
+├── .config/                mirrors ~/.config/ — each subdirectory is symlinked by install.sh
+│   ├── hypr/               Hyprland config (Lua), hypridle, hyprlock, scripts, themes
+│   ├── waybar/             bar config, per-module CSS, scripts, themes
+│   ├── kitty/              terminal config and themes
+│   ├── swaync/             notification center config and themes
+│   ├── rofi/               launcher, wallpaper picker, themes
+│   ├── fastfetch/          per-theme fetch configs
+│   ├── wlogout/            logout screen layout and icons
+│   └── btop/               system monitor config
+├── .local/
+│   └── bin/                rofi-launcher, rofi-wallpaper, rofi-clipboard
+├── assets/                 wallpapers, icon pack archive, GTK theme archive
+├── screenshots/            preview GIFs for the README
+├── packages.txt            full package list (pacman/yay)
+├── install.sh              automated installer
+└── README.md
 ```
