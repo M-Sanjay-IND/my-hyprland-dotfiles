@@ -21,7 +21,7 @@ hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd(editor))
 hl.bind(mainMod .. " + ALT + V",     hl.dsp.exec_cmd(editorAlt))
 hl.bind(mainMod .. " + F",           hl.dsp.exec_cmd(terminal .. " " .. fileManager))
 hl.bind(mainMod .. " + A",           hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P",           hl.dsp.exec_cmd(colorPicker .. " | wl-copy"))
+hl.bind(mainMod .. " + P",           hl.dsp.exec_cmd("sh -c '" .. colorPicker .. " | wl-copy'"))
 hl.bind(mainMod .. " + SHIFT + P",   hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/idle-toggle.sh"))
 hl.bind(mainMod .. " + SHIFT + A",   hl.dsp.exec_cmd(home .. "/.local/bin/rofi-launcher -show emoji"))
 
