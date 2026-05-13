@@ -115,3 +115,52 @@ hl.bind(mainMod .. " + SHIFT + Tab", hl.dsp.focus({ workspace = "previous" }))
 -- Scroll through workspaces with mouse wheel
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+
+-- Lock / logout
+hl.bind(mainMod .. " + L",      hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd(
+    "wlogout -p layer-shell" ..
+    " -C " .. home .. "/.config/wlogout/style.css" ..
+    " -l " .. home .. "/.config/wlogout/layout" ..
+    " -b 5"
+))
+
+-- Waybar toggle
+hl.bind("CTRL + ESCAPE", hl.dsp.exec_cmd("sh -c 'killall waybar || waybar'"))
+
+-- Screenshots
+hl.bind(            "Print",              hl.dsp.exec_cmd("grimblast --notify copysave screen"))
+hl.bind(mainMod .. " + Print",           hl.dsp.exec_cmd("grimblast --notify copysave active"))
+hl.bind(mainMod .. " + ALT + Print",     hl.dsp.exec_cmd("grimblast --notify copysave area"))
+hl.bind(mainMod .. " + SHIFT + Print",   hl.dsp.exec_cmd(
+    "sh -c 'grimblast save area /tmp/swappy-screenshot.png && swappy -f /tmp/swappy-screenshot.png'"
+))
+
+-- Volume (locked = works on lock screen too)
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/osd-volume up"),   { locked = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/osd-volume down"), { locked = true })
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/osd-volume mic"),  { locked = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/osd-volume mute"), { locked = true })
+
+-- Media keys
+hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
+hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+
+-- Brightness
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/osd-brightness up"),   { locked = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/osd-brightness down"), { locked = true })
+
+-- Notification center toggle
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t"))
+
+-- Keybind cheat sheet
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(
+    "kitty --class keybind-help --override font_size=10 -e " ..
+    home .. "/.config/hypr/scripts/keybind-help.sh"
+))
+
+-- Theme switch
+hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/theme-switch.sh matrix"))
+hl.bind(mainMod .. " + CTRL + I",  hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/theme-switch.sh macchiato"))
