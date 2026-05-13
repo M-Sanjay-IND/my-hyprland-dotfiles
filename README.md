@@ -14,7 +14,7 @@ Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin
 
 | Role | Tool |
 |---|---|
-| Compositor | Hyprland |
+| Compositor | Hyprland 0.55+ (Lua config) |
 | Bar | Waybar |
 | Terminal | Kitty |
 | Notification center | sway-notification-center |
@@ -43,9 +43,10 @@ At the moment there is no automated install script. To replicate this setup manu
 3. Copy the scripts in `scripts/` to `~/.local/bin/` and make them executable
 4. Extract `assets/icons/Tela-circle-dracula.tar.xz` to `~/.local/share/icons/`
 5. Extract `assets/themes/Catppuccin-Mocha.tar.xz` to `~/.local/share/themes/`
-6. Replace all occurrences of `kernel_x23_6` with your own username across the config files:
+6. The Hyprland config uses `os.getenv("HOME")` for all paths — no username replacement needed.
+   Check `hyprlock.conf` and `waybar/scripts/theme-switch.sh` for any remaining hardcoded paths:
    ```bash
-   grep -rl 'kernel_x23_6' ~/.config/hypr ~/.config/waybar ~/.config/rofi | xargs sed -i 's/kernel_x23_6/YOUR_USERNAME/g'
+   grep -r 'kernel_x23_6' ~/.config/ 2>/dev/null
    ```
 7. Log out and back in
 
@@ -81,7 +82,7 @@ The wallpaper picker (`Super + SHIFT + W`) opens a Rofi gallery. You can also se
 
 ## Keybinds
 
-A cheatsheet overlay is available at any time with `Super + I`. All bindings are defined in `hyprland/conf/keybinds.conf`.
+A cheatsheet overlay is available at any time with `Super + I`. All bindings are defined in `hyprland/conf/keybinds.lua`.
 
 ---
 
