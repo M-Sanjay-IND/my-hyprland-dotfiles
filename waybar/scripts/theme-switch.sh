@@ -42,7 +42,7 @@ ln -sf "$HOME/.config/kitty/themes/${theme}.conf"     "$HOME/.config/kitty/theme
 ln -sf "$HOME/.config/swaync/themes/${theme}.css"     "$HOME/.config/swaync/theme.css"
 rm -f "$HOME/.config/swaync/style.css"
 cp "$HOME/.config/swaync/themes/${theme}.css"         "$HOME/.config/swaync/style.css"
-ln -sf "$HOME/.config/hypr/themes/${theme}.conf"      "$HOME/.config/hypr/theme.conf"
+ln -sf "$HOME/.config/hypr/themes/${theme}.lua"  "$HOME/.config/hypr/theme.lua"
 printf '%s' "$wall_dir" > "$HOME/.config/rofi/.wall_dir"
 
 # Wallpaper random dalla cartella del tema
