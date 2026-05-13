@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# ── Banner ───────────────────────────────────────────────────────────────────
+figlet -f slant "Kernel_x23_6" 2>/dev/null || true
+echo "   my-hyprland-dotfiles installer"
+echo
+
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # ── Colors ───────────────────────────────────────────────────────────────────
@@ -90,7 +95,7 @@ fi
 
 # ── 6. Initialize theme ───────────────────────────────────────────────────────
 info "Initializing macchiato theme..."
-bash "$HOME/.config/waybar/scripts/theme-switch.sh" macchiato 2>/dev/null || true
+bash "$DOTFILES/.config/waybar/scripts/theme-switch.sh" macchiato 2>/dev/null || true
 
 echo
 info "Done. Log out and back in (or: uwsm start hyprland) to launch Hyprland."
