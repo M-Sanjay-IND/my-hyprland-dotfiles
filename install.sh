@@ -12,9 +12,43 @@ DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
 info()  { echo -e "  ${GREEN}✓${NC}  $*"; }
 warn()  { echo -e "  ${YELLOW}!${NC}  $*"; }
+die()   { echo -e "  ${RED}✗  $*${NC}" >&2; exit 1; }
 step()  { echo -e "\n${CYAN}▶ $*${NC}"; }
 
-step "Dotfiles directory: $DOTFILES"
+# ── Pre-flight checks ─────────────────────────────────────────────────────────
+[[ "$EUID" -eq 0 ]]         && die "Do not run as root."
+command -v pacman &>/dev/null || die "pacman not found — this installer is Arch Linux only."
+[[ -f "$DOTFILES/packages.txt" ]] || die "packages.txt not found in $DOTFILES"
+[[ -f "$DOTFILES/assets/icons/Tela-circle-dracula.tar.xz" ]] \
+    || die "Missing asset: assets/icons/Tela-circle-dracula.tar.xz"
+[[ -f "$DOTFILES/assets/themes/Catppuccin-Mocha.tar.xz" ]] \
+    || die "Missing asset: assets/themes/Catppuccin-Mocha.tar.xz"
+
+# ── What this installs ────────────────────────────────────────────────────────
+echo -e "  Dotfiles from: ${CYAN}$DOTFILES${NC}"
+echo
+echo "  Components that will be configured:"
+echo "    Hyprland 0.55+    Wayland compositor (Lua config)"
+echo "    Waybar            status bar"
+echo "    Rofi              app launcher, clipboard picker, emoji"
+echo "    Kitty             terminal"
+echo "    swaync            notification center"
+echo "    wlogout           session logout screen"
+echo "    Fastfetch         system fetch"
+echo "    btop              system monitor"
+echo "    hyprlock          lock screen"
+echo "    hypridle          idle / power management daemon"
+echo "    yazi              terminal file manager (via kitty)"
+echo "    awww              wallpaper daemon"
+echo "    cliphist          clipboard history (wl-paste)"
+echo
+echo "  Assets:"
+echo "    Tela-circle-dracula   icon theme  → ~/.local/share/icons/"
+echo "    Catppuccin-Mocha      GTK theme   → ~/.local/share/themes/"
+echo "    Wallpapers                        → ~/.config/assets/backgrounds/"
+echo
+read -rp "  Proceed? [y/N] " confirm
+[[ "$confirm" =~ ^[Yy]$ ]] || { echo "Aborted."; exit 0; }
 
 # ── Step 1: Package check ─────────────────────────────────────────────────────
 step "1/5  Checking packages"
@@ -37,8 +71,8 @@ if [[ ${#missing[@]} -gt 0 ]]; then
     warn "${#missing[@]} missing packages:"
     printf '      %s\n' "${missing[@]}"
     echo
-    # yay handles both official repos and AUR — it must be installed first
-    # (install it manually from AUR if not present: makepkg -si)
+    # yay handles both official repos and AUR — must be installed first
+    # (bootstrap: git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si)
     if ! command -v yay &>/dev/null; then
         warn "yay not found — install it first: https://github.com/Jguer/yay"
         warn "Skipping package install."
