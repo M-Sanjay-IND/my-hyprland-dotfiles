@@ -8,52 +8,71 @@ echo
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# ── Colors ───────────────────────────────────────────────────────────────────
-RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
-info()  { echo -e "${GREEN}[info]${NC}  $*"; }
-warn()  { echo -e "${YELLOW}[warn]${NC}  $*"; }
+# ── Colors & helpers ─────────────────────────────────────────────────────────
+RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
+info()  { echo -e "  ${GREEN}✓${NC}  $*"; }
+warn()  { echo -e "  ${YELLOW}!${NC}  $*"; }
+step()  { echo -e "\n${CYAN}▶ $*${NC}"; }
 
-# ── 1. Package check ──────────────────────────────────────────────────────────
-info "Checking packages..."
+step "Dotfiles directory: $DOTFILES"
+
+# ── Step 1: Package check ─────────────────────────────────────────────────────
+step "1/5  Checking packages"
+
+total=0
 missing=()
 while IFS= read -r line; do
     [[ "$line" =~ ^[[:space:]]*# || -z "${line// }" ]] && continue
     pkg="${line%%#*}"
     pkg="${pkg//[[:space:]]}"
     [[ -z "$pkg" ]] && continue
+    (( total++ )) || true
     pacman -Q "$pkg" &>/dev/null || missing+=("$pkg")
 done < "$DOTFILES/packages.txt"
 
+installed=$(( total - ${#missing[@]} ))
+echo "  $installed / $total packages already installed"
+
 if [[ ${#missing[@]} -gt 0 ]]; then
     warn "${#missing[@]} missing packages:"
-    printf '  %s\n' "${missing[@]}"
+    printf '      %s\n' "${missing[@]}"
     echo
-    read -rp "Install with yay now? [y/N] " answer
-    [[ "$answer" =~ ^[Yy]$ ]] && yay -S --needed "${missing[@]}" \
-        || warn "Skipping package install — some features may not work."
+    # yay handles both official repos and AUR — it must be installed first
+    # (install it manually from AUR if not present: makepkg -si)
+    if ! command -v yay &>/dev/null; then
+        warn "yay not found — install it first: https://github.com/Jguer/yay"
+        warn "Skipping package install."
+    else
+        read -rp "  Install missing packages with yay? [y/N] " answer
+        if [[ "$answer" =~ ^[Yy]$ ]]; then
+            yay -S --needed "${missing[@]}"
+        else
+            warn "Skipping. Some features may not work."
+        fi
+    fi
 else
-    info "All packages present."
+    info "All $total packages present."
 fi
 
-# ── 2. Symlink helper ─────────────────────────────────────────────────────────
+# ── Symlink helper ────────────────────────────────────────────────────────────
 link() {
     local src="$1" dst="$2"
     if [[ -L "$dst" && "$(readlink "$dst")" == "$src" ]]; then
-        info "OK     $dst"
+        info "already linked  $dst"
         return
     fi
     if [[ -e "$dst" && ! -L "$dst" ]]; then
-        warn "Backup $dst → ${dst}.bak"
+        warn "backing up  $dst → ${dst}.bak"
         mv "$dst" "${dst}.bak"
     fi
     [[ -L "$dst" ]] && rm "$dst"
     mkdir -p "$(dirname "$dst")"
     ln -sf "$src" "$dst"
-    info "Linked $dst"
+    info "linked  $src  →  $dst"
 }
 
-# ── 3. Config symlinks ────────────────────────────────────────────────────────
-info "Symlinking config dirs..."
+# ── Step 2: Config symlinks ───────────────────────────────────────────────────
+step "2/5  Symlinking ~/.config dirs"
 link "$DOTFILES/.config/hypr"       "$HOME/.config/hypr"
 link "$DOTFILES/.config/waybar"     "$HOME/.config/waybar"
 link "$DOTFILES/.config/kitty"      "$HOME/.config/kitty"
@@ -64,8 +83,8 @@ link "$DOTFILES/.config/wlogout"    "$HOME/.config/wlogout"
 link "$DOTFILES/.config/btop"       "$HOME/.config/btop"
 link "$DOTFILES/assets"             "$HOME/.config/assets"
 
-# ── 4. Local bin scripts ──────────────────────────────────────────────────────
-info "Symlinking ~/.local/bin scripts..."
+# ── Step 3: Local bin scripts ─────────────────────────────────────────────────
+step "3/5  Symlinking ~/.local/bin scripts"
 mkdir -p "$HOME/.local/bin"
 for script in "$DOTFILES/.local/bin/"*; do
     [[ -f "$script" ]] || continue
@@ -73,29 +92,35 @@ for script in "$DOTFILES/.local/bin/"*; do
     link "$script" "$HOME/.local/bin/$(basename "$script")"
 done
 
-# ── 5. Assets: icon pack + GTK theme ─────────────────────────────────────────
-info "Installing assets..."
+# ── Step 4: Assets ────────────────────────────────────────────────────────────
+step "4/5  Installing icon pack and GTK theme"
 mkdir -p "$HOME/.local/share/icons" "$HOME/.local/share/themes"
 
 if [[ ! -d "$HOME/.local/share/icons/Tela-circle-dracula" ]]; then
+    echo "  Extracting Tela-circle-dracula icon pack..."
     tar -xf "$DOTFILES/assets/icons/Tela-circle-dracula.tar.xz" \
         -C "$HOME/.local/share/icons/"
-    info "Icon pack installed."
+    info "icon pack installed → ~/.local/share/icons/Tela-circle-dracula"
 else
-    info "Icon pack already present."
+    info "icon pack already present"
 fi
 
 if [[ ! -d "$HOME/.local/share/themes/Catppuccin-Mocha" ]]; then
+    echo "  Extracting Catppuccin-Mocha GTK theme..."
     tar -xf "$DOTFILES/assets/themes/Catppuccin-Mocha.tar.xz" \
         -C "$HOME/.local/share/themes/"
-    info "GTK theme installed."
+    info "GTK theme installed → ~/.local/share/themes/Catppuccin-Mocha"
 else
-    info "GTK theme already present."
+    info "GTK theme already present"
 fi
 
-# ── 6. Initialize theme ───────────────────────────────────────────────────────
-info "Initializing macchiato theme..."
+# ── Step 5: Initialize theme ──────────────────────────────────────────────────
+step "5/5  Initializing macchiato theme"
+echo "  Running theme-switch.sh macchiato (safe outside Hyprland)..."
 bash "$DOTFILES/.config/waybar/scripts/theme-switch.sh" macchiato 2>/dev/null || true
+info "theme initialized"
 
 echo
-info "Done. Log out and back in (or: uwsm start hyprland) to launch Hyprland."
+echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${GREEN}  Done! Log out and back in, then:  uwsm start hyprland${NC}"
+echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
