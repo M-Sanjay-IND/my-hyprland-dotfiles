@@ -14,22 +14,22 @@ The goal is a Hyprland setup that is ready for daily use out of a fresh Arch ins
 
 ## Components
 
-| Role | Tool | Optional |
-|---|---|---|
-| Compositor | Hyprland 0.55+ (Lua config) | |
-| Bar | Waybar | |
-| Terminal | Kitty | yes |
-| Notification center | sway-notification-center | |
-| App launcher | Rofi (Wayland) | |
-| Fetch | Fastfetch | |
-| Logout screen | wlogout | |
-| System monitor | btop | |
-| Wallpaper daemon | awww | |
-| Lock / idle | hyprlock + hypridle | |
-| Clipboard | cliphist + wl-paste | |
-| Editor | Neovim (lazy.nvim, LSP, Treesitter) | yes |
-| Shell | Zsh + Oh My Zsh + Powerlevel10k | yes |
-| File manager | yazi | yes (with Kitty) |
+| Role | Tool |
+|---|---|
+| Compositor | Hyprland 0.55+ (Lua config) |
+| Bar | Waybar |
+| Terminal | Kitty |
+| Notification center | sway-notification-center |
+| App launcher | Rofi (Wayland) |
+| Fetch | Fastfetch |
+| Logout screen | wlogout |
+| System monitor | btop |
+| Wallpaper daemon | awww |
+| Lock / idle | hyprlock + hypridle |
+| Clipboard | cliphist + wl-paste |
+| Editor | Neovim (lazy.nvim, LSP, Treesitter) |
+| Shell | Zsh + Oh My Zsh + Powerlevel10k |
+| File manager | yazi |
 
 **Font:** JetBrainsMono Nerd Font  
 **Icons:** Tela-circle-dracula (included as archive in `assets/`)  
@@ -85,7 +85,7 @@ What it removes:
 - `~/.zshrc` symlink, `~/.oh-my-zsh`, restores default shell to bash
 
 What it keeps:
-- `sddm`, `hyprland`, `uwsm`, `kitty`, `yay`, `pacman-contrib` — so the system stays bootable
+- `sddm`, `hyprland`, `uwsm`, `kitty`, `yay`, `pacman-contrib` - so the system stays bootable
 
 Packages from `packages.txt` are listed before removal and require a second confirmation. Once you install another DE you can cleanly remove Hyprland with:
 
