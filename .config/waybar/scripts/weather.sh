@@ -23,7 +23,6 @@ if [ -z "$RESP" ]; then
 fi
 
 TEMP=$(echo "$RESP" | jq -r '.current_condition[0].temp_C')
-DESC=$(echo "$RESP" | jq -r '.current_condition[0].weatherDesc[0].value')
 ICON_CODE=$(echo "$RESP" | jq -r '.current_condition[0].weatherCode')
 
 case "$ICON_CODE" in

@@ -24,10 +24,10 @@ command -v pacman &>/dev/null     || die "pacman not found — Arch Linux only."
 echo -e "  Dotfiles from: ${CYAN}$DOTFILES${NC}"
 echo
 echo "  The following will be removed:"
-echo "    Config symlinks   ~/.config/{hypr,waybar,kitty,swaync,rofi,fastfetch,wlogout,btop,nvim}"
-echo "    Local bin scripts ~/.local/bin/{rofi-launcher,rofi-clipboard,rofi-wallpaper}"
-echo "    Assets            ~/.config/assets"
-echo "    Zsh setup         ~/.zshrc (symlink), ~/.oh-my-zsh, default shell → bash"
+echo "    Config symlinks   $HOME/.config/{hypr,waybar,kitty,swaync,rofi,fastfetch,wlogout,btop,nvim}"
+echo "    Local bin scripts $HOME/.local/bin/{rofi-launcher,rofi-clipboard,rofi-wallpaper}"
+echo "    Assets            $HOME/.config/assets"
+echo "    Zsh setup         $HOME/.zshrc (symlink), $HOME/.oh-my-zsh, default shell → bash"
 echo "    Packages          all from packages.txt except preserved packages"
 echo
 echo "  Preserved (not touched):"
@@ -52,25 +52,25 @@ unlink_if_ours() {
 }
 
 # ── Step 1: Config symlinks ───────────────────────────────────────────────────
-step "1/5  Removing ~/.config symlinks"
+step "1/5  Removing $HOME/.config symlinks"
 for dir in hypr waybar kitty swaync rofi fastfetch wlogout btop nvim; do
     unlink_if_ours "$HOME/.config/$dir"
 done
 
 # ── Step 2: Local bin scripts ─────────────────────────────────────────────────
-step "2/5  Removing ~/.local/bin scripts"
+step "2/5  Removing $HOME/.local/bin scripts"
 for script in "$DOTFILES/.local/bin/"*; do
     [[ -f "$script" ]] || continue
     unlink_if_ours "$HOME/.local/bin/$(basename "$script")"
 done
 
 # ── Step 3: Assets ────────────────────────────────────────────────────────────
-step "3/5  Removing ~/.config/assets"
+step "3/5  Removing $HOME/.config/assets"
 if [[ -d "$HOME/.config/assets" ]]; then
     rm -rf "$HOME/.config/assets"
-    info "removed ~/.config/assets"
+    info "removed $HOME/.config/assets"
 else
-    info "~/.config/assets not found, skipping"
+    info "$HOME/.config/assets not found, skipping"
 fi
 
 # ── Step 4: Zsh / Oh My Zsh ──────────────────────────────────────────────────
@@ -78,18 +78,18 @@ step "4/5  Removing Zsh setup"
 
 if [[ -L "$HOME/.zshrc" && "$(readlink "$HOME/.zshrc")" == "$DOTFILES"* ]]; then
     rm "$HOME/.zshrc"
-    info "removed ~/.zshrc symlink"
+    info "removed $HOME/.zshrc symlink"
 elif [[ -e "$HOME/.zshrc" ]]; then
-    warn "~/.zshrc exists but is not a repo symlink — leaving it in place"
+    warn "$HOME/.zshrc exists but is not a repo symlink — leaving it in place"
 fi
 
 if [[ -L "$HOME/.oh-my-zsh" && "$(readlink "$HOME/.oh-my-zsh")" == "$DOTFILES"* ]]; then
     rm "$HOME/.oh-my-zsh"
-    info "removed ~/.oh-my-zsh symlink"
+    info "removed $HOME/.oh-my-zsh symlink"
 elif [[ -e "$HOME/.oh-my-zsh" ]]; then
-    warn "~/.oh-my-zsh exists but is not a repo-owned symlink — leaving it in place"
+    warn "$HOME/.oh-my-zsh exists but is not a repo-owned symlink — leaving it in place"
 else
-    info "~/.oh-my-zsh not found, skipping"
+    info "$HOME/.oh-my-zsh not found, skipping"
 fi
 
 if [[ "$SHELL" != "$(command -v bash)" ]]; then

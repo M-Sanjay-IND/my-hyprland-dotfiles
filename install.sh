@@ -41,7 +41,7 @@ echo "    yazi              terminal file manager (via kitty, optional)"
 echo "    awww              wallpaper daemon"
 echo "    cliphist          clipboard history (wl-paste)"
 echo
-echo "  Assets (copied to ~/.config/assets):"
+echo "  Assets (copied to $HOME/.config/assets):"
 echo "    Wallpapers            whitehat/ + blackhat/ backgrounds"
 echo "    wlogout icons         lock, logout, power, sleep, restart"
 echo "    Icon + GTK theme      install via yay (not bundled in repo)"
@@ -118,7 +118,7 @@ link() {
 }
 
 # ── Step 2: Config symlinks ───────────────────────────────────────────────────
-step "2/6  Symlinking ~/.config dirs"
+step "2/6  Symlinking $HOME/.config dirs"
 link "$DOTFILES/.config/hypr"       "$HOME/.config/hypr"
 link "$DOTFILES/.config/waybar"     "$HOME/.config/waybar"
 APPLY_KITTY_CONFIG=false
@@ -171,7 +171,7 @@ else
 fi
 
 # ── Step 4: Local bin scripts ─────────────────────────────────────────────────
-step "4/6  Symlinking ~/.local/bin scripts"
+step "4/6  Symlinking $HOME/.local/bin scripts"
 
 mkdir -p "$HOME/.local/bin"
 for script in "$DOTFILES/.local/bin/"*; do
@@ -181,13 +181,13 @@ for script in "$DOTFILES/.local/bin/"*; do
 done
 
 # ── Step 5: Assets ────────────────────────────────────────────────────────────
-step "5/6  Copying assets to ~/.config/assets"
+step "5/6  Copying assets to $HOME/.config/assets"
 if [[ ! -d "$HOME/.config/assets" ]]; then
     echo "  Copying assets (backgrounds, wlogout icons)..."
     cp -r "$DOTFILES/assets" "$HOME/.config/assets"
-    info "assets copied → ~/.config/assets"
+    info "assets copied → $HOME/.config/assets"
 else
-    echo "  Syncing new files into ~/.config/assets (existing files untouched)..."
+    echo "  Syncing new files into $HOME/.config/assets (existing files untouched)..."
     cp -rn "$DOTFILES/assets/." "$HOME/.config/assets/"
     info "assets synced"
 fi
