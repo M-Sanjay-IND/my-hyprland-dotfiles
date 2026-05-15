@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ShellCheck
+        run: sudo apt-get install -y shellcheck
+      - name: Run ShellCheck
+        run: |
+          find . -name "*.sh" -not -path "./.git/*" \
+            | xargs shellcheck --shell=bash --severity=warning
+
+  lua-syntax:
+    name: Lua syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua
+        run: sudo apt-get install -y lua5.4
+      - name: Check Lua syntax
+        run: |
+          find . -name "*.lua" -not -path "./.git/*" \
+            | xargs -I{} luac5.4 -p {}
+
+  permissions:
+    name: File permissions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: All .sh files must be executable
+        run: |
+          fail=0
+          while IFS= read -r -d '' f; do
+            mode=$(git ls-files --stage -- "$f" | awk '{print $1}')
+            if [[ "$mode" != "100755" ]]; then
+              echo "NOT executable: $f  (mode $mode)"
+              fail=1
+            fi
+          done < <(git ls-files -z -- '*.sh')
+          exit "$fail"
