@@ -1,7 +1,7 @@
 # my-hyprland-dotfiles
 
 [![CI](https://github.com/Kernel236/my-hyprland-dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/Kernel236/my-hyprland-dotfiles/actions/workflows/ci.yml)
-[![Stars](https://img.shields.io/github/stars/Kernel236/my-hyprland-dotfiles?label=thanks%20for%20the%20%E2%AD%90s)](https://github.com/Kernel236/my-hyprland-dotfiles/stargazers)
+[![Stars](https://img.shields.io/github/stars/Kernel236/my-hyprland-dotfiles?label=thanks%20for%20the%20%E2%AD%90&color=yellow)](https://github.com/Kernel236/my-hyprland-dotfiles/stargazers)
 [![Made with love](https://img.shields.io/badge/made%20with-%E2%9D%A4-red)](https://github.com/Kernel236/my-hyprland-dotfiles)
 
 Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin Mocha, daily use) and **matrix** (red-on-black, for when the mood calls for it). Theme switching is live with one click in the bar or a keyboard shortcut, and every component updates without restarting anything.
