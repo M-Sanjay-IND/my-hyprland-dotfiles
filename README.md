@@ -6,7 +6,9 @@
 
 Hyprland rice for Arch Linux with a dual-theme system: **Catppuccin Mocha** for daily use and **red-on-black**, for when the mood calls for it. Theme switching is live with one click in the bar or a keyboard shortcut, and every component updates without restarting anything.
 
-The goal is a Hyprland setup that is ready for daily use out of a fresh Arch install. The architecture is modular without being overly complex - no config overrides, no duplicate files - which makes it easier to customize and extend without starting from scratch. It sits between a minimal base dotfile and a fully-featured rice like the most popular ones. Almost every config file includes inline comments pulled from the official documentation, so experimenting with options is quick and low-friction.
+The goal is a Hyprland setup that is ready for daily use out of a fresh Arch install. The architecture is modular without becoming overly complex: no config overrides, no duplicate files, and no need to rebuild everything just to customize it. 
+It sits between a minimal base dotfile and a fully-featured rice like the most popular ones. Almost every config file includes inline comments pulled from the official documentation, so experimenting with options is quick and low-friction.
+The aim is not just to look polished, but to stay practical, readable, and easy to extend.
 
 ---
 
@@ -14,8 +16,37 @@ The goal is a Hyprland setup that is ready for daily use out of a fresh Arch ins
 
 ![preview](screenshots/preview.gif)
 
+## Workflow demo
+
 Full workflow demo on r/unixporn: [My first Hyprland full dual setup, no preconfig](https://www.reddit.com/r/unixporn/comments/1t1uams/my_first_hyprland_full_dual_setup_no_preconfig_no/) 
-- New features has been added since that video.
+- New features have been added since that video.
+
+---
+
+## Screenshots
+
+<table>
+  <tr>
+    <th>Catppuccin Macchiato</th>
+    <th>Matrix</th>
+  </tr>
+  <tr>
+    <td><img src="screenshots/btop_catppuccin.png"/></td>
+    <td><img src="screenshots/btop_matrix.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/swaync_catppuccin.png"/></td>
+    <td><img src="screenshots/swaync_matrix.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/rofi_wallpaper_catppuccin.png"/></td>
+    <td><img src="screenshots/rofi_wallpaper_matrix.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/rofi_on_yazi_catppuccin.png"/></td>
+    <td><img src="screenshots/rofi_on_yazi_matrix.png"/></td>
+  </tr>
+</table>
 
 ---
 
@@ -46,7 +77,7 @@ Full workflow demo on r/unixporn: [My first Hyprland full dual setup, no preconf
 
 ## Installation
 
-> Arch Linux only. Assumes a base Arch install with internet access.
+> Arch Linux only. This setup assumes a mostly clean Arch base install with internet access and yay available or installable.
 
 1. Clone the repo:
    ```bash
@@ -96,7 +127,7 @@ What it removes:
 What it keeps:
 - `sddm`, `hyprland`, `uwsm`, `kitty`, `yay`, `pacman-contrib`, so the system stays bootable
 
-Packages from `packages.txt` are listed before removal and require a second confirmation. Once you install another DE you can cleanly remove Hyprland with:
+Packages from packages-core.txt and packages-optional.txt are listed before removal and require a second confirmation. Once you install another DE you can cleanly remove Hyprland with:
 
 ```bash
 yay -Rns hyprland uwsm xdg-desktop-portal-hyprland
