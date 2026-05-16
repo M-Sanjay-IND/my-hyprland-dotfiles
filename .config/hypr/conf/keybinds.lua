@@ -53,14 +53,8 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SPACE", hl.dsp.window.center())
 
 -- Alt-Tab: cycle windows (prev/next) and bring to top
-hl.bind("ALT + Tab", function()
-    hl.dispatch(hl.dsp.window.cycle_next({ next = false }))
-    hl.dispatch(hl.dsp.window.bring_to_top())
-end)
-hl.bind("ALT + SHIFT + Tab", function()
-    hl.dispatch(hl.dsp.window.cycle_next())
-    hl.dispatch(hl.dsp.window.bring_to_top())
-end)
+hl.bind("ALT + Tab",         hl.dsp.window.cycle_next())
+hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({ next = false }))
 
 -- Focus with arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
