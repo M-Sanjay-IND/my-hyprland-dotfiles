@@ -61,6 +61,8 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Force block cursor (overrides shell escape sequences)
-_set_block_cursor() { echo -ne '\e[2 q'; }
+_set_block_cursor() { echo -ne '\e[1 q'; }
 precmd_functions+=(_set_block_cursor)
+zle-line-init() { _set_block_cursor; }
+zle -N zle-line-init
 
