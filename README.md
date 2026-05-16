@@ -58,7 +58,7 @@ The goal is a Hyprland setup that is ready for daily use out of a fresh Arch ins
 
    The installer will:
    - Check and install missing packages via `yay`
-   - Ask whether to install optional components: **Kitty**, **Zsh + Oh My Zsh**, **Neovim** — answering `n` skips the packages and the symlink for that component
+   - Ask whether to install optional components: **Kitty**, **Zsh + Oh My Zsh**, **Neovim**. Answering `n` skips the packages and the symlink for that component
    - Create symlinks from `~/.config/` into the repo
    - Copy wallpapers and assets to `~/.config/assets`
    - Initialize the macchiato theme
@@ -68,7 +68,7 @@ The goal is a Hyprland setup that is ready for daily use out of a fresh Arch ins
    uwsm start hyprland
    ```
 
-Any future edit to the repo is reflected immediately — symlinks keep `~/.config/` in sync with the repo.
+Any future edit to the repo is reflected immediately. Symlinks keep `~/.config/` in sync with the repo.
 
 To add the BlackArch repository (optional), follow the official instructions at https://blackarch.org/downloads.html#install-repo
 
@@ -91,7 +91,7 @@ What it removes:
 - `~/.zshrc` symlink, `~/.oh-my-zsh`, restores default shell to bash
 
 What it keeps:
-- `sddm`, `hyprland`, `uwsm`, `kitty`, `yay`, `pacman-contrib` - so the system stays bootable
+- `sddm`, `hyprland`, `uwsm`, `kitty`, `yay`, `pacman-contrib`, so the system stays bootable
 
 Packages from `packages.txt` are listed before removal and require a second confirmation. Once you install another DE you can cleanly remove Hyprland with:
 
@@ -136,9 +136,9 @@ Remove the languages you do not use.
 
 **Plugins:** Telescope, nvim-treesitter, nvim-cmp + LuaSnip, lualine, indent-blankline, nvim-autopairs, nvim-surround, catppuccin
 
-**Theme:** Catppuccin Macchiato with transparent background — opacity and blur are managed by Hyprland on the Kitty window.
+**Theme:** Catppuccin Macchiato with transparent background. Opacity and blur are managed by Hyprland on the Kitty window.
 
-**First launch:** Mason installs all LSP servers automatically (takes ~1-2 min). Subsequent launches are instant.
+**First launch:** Mason installs all LSP servers automatically (takes ~1-2 min on first launch).
 
 ---
 
@@ -163,7 +163,7 @@ A cheatsheet overlay is available at any time with `Super + I`. All bindings are
 
 ```
 my-hyprland-dotfiles/
-├── .config/                mirrors ~/.config/ — each subdirectory is symlinked by install.sh
+├── .config/                mirrors ~/.config/ - each subdirectory is symlinked by install.sh
 │   ├── hypr/               Hyprland config (Lua), hypridle, hyprlock, scripts, themes
 │   ├── waybar/             bar config, per-module CSS, scripts, themes
 │   ├── kitty/              terminal config and themes
@@ -179,9 +179,9 @@ my-hyprland-dotfiles/
 ├── assets/                 wallpapers, icon pack archive, GTK theme archive
 ├── screenshots/            preview GIFs for the README
 ├── packages-core.txt       required packages (always installed)
-├── packages-optional.txt   optional packages (Kitty, Zsh, Neovim — installer asks)
-├── install.sh              installer — symlinks, packages, optional components
-├── uninstall.sh            uninstaller — removes symlinks, assets, packages
+├── packages-optional.txt   optional packages (Kitty, Zsh, Neovim - installer asks)
+├── install.sh              installer - symlinks, packages, optional components
+├── uninstall.sh            uninstaller - removes symlinks, assets, packages
 ├── README.md
 └── TROUBLESHOOTING.md      common issues and fixes
 ```
