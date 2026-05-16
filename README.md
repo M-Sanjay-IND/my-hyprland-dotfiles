@@ -4,9 +4,9 @@
 [![Stars](https://img.shields.io/github/stars/Kernel236/my-hyprland-dotfiles?label=thanks%20for%20the%20%E2%AD%90&color=grey)](https://github.com/Kernel236/my-hyprland-dotfiles/stargazers)
 [![Made with love](https://img.shields.io/badge/made%20with-%E2%9D%A4-red)](https://github.com/Kernel236/my-hyprland-dotfiles)
 
-Hyprland rice for Arch Linux with a dual-theme system: **macchiato** (Catppuccin Mocha, daily use) and **matrix** (red-on-black, for when the mood calls for it). Theme switching is live with one click in the bar or a keyboard shortcut, and every component updates without restarting anything.
+Hyprland rice for Arch Linux with a dual-theme system: **Catppuccin Mocha** for daily use and **red-on-black**, for when the mood calls for it. Theme switching is live with one click in the bar or a keyboard shortcut, and every component updates without restarting anything.
 
-The goal is a Hyprland setup that is ready for daily use out of a fresh Arch install. The architecture is modular without being overly complex — no config overrides, no duplicate files — which makes it easier to customize and extend without starting from scratch. It sits between a minimal base dotfile and a fully-featured rice like the most popular ones. Almost every config file includes inline comments pulled from the official documentation, so experimenting with options is quick and low-friction.
+The goal is a Hyprland setup that is ready for daily use out of a fresh Arch install. The architecture is modular without being overly complex - no config overrides, no duplicate files - which makes it easier to customize and extend without starting from scratch. It sits between a minimal base dotfile and a fully-featured rice like the most popular ones. Almost every config file includes inline comments pulled from the official documentation, so experimenting with options is quick and low-friction.
 
 ---
 
