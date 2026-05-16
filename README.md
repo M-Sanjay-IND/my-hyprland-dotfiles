@@ -128,7 +128,6 @@ Config lives in `.config/nvim/` and is symlinked to `~/.config/nvim` by the inst
 | Language | Server |
 |---|---|
 | Python | pyright |
-| R | r-languageserver |
 | Lua | lua-language-server |
 | Bash | bash-language-server |
 | C / C++ | clangd |

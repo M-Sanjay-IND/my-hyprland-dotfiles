@@ -128,10 +128,10 @@ Log out and back in - some apps (Waybar, Kitty) cache the font list at startup.
 
 ## Neovim: Mason fails to install LSP servers
 
-Mason needs the runtime dependencies from `packages-optional.txt` (`nodejs`, `npm`, `r`, `python-pip`) plus `gcc` and `make` from core. If you skipped Neovim during install and later want it:
+Mason needs the runtime dependencies from `packages-optional.txt` (`nodejs`, `npm`, `python-pip`) plus `gcc` and `make` from core. If you skipped Neovim during install and later want it:
 
 ```bash
-yay -S neovim lazygit nodejs npm r python-pip
+yay -S neovim lazygit nodejs npm python-pip
 bash ~/my-hyprland-dotfiles/install.sh   # re-run - it skips already-done steps
 ```
 

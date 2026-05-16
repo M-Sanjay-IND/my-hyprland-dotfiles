@@ -60,7 +60,7 @@ echo
 SKIP_PKGS=()
 $INSTALL_KITTY || SKIP_PKGS+=(kitty yazi)
 $INSTALL_ZSH   || SKIP_PKGS+=(zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-theme-powerlevel10k-git)
-$INSTALL_NVIM  || SKIP_PKGS+=(neovim lazygit nodejs npm r python-pip)
+$INSTALL_NVIM  || SKIP_PKGS+=(neovim lazygit nodejs npm python-pip)
 
 # ── Step 1: Package check ─────────────────────────────────────────────────────
 step "1/6  Checking packages"
