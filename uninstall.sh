@@ -29,7 +29,7 @@ echo "    Config symlinks   $HOME/.config/{hypr,waybar,kitty,swaync,rofi,fastfet
 echo "    Local bin scripts $HOME/.local/bin/{rofi-launcher,rofi-clipboard,rofi-wallpaper}"
 echo "    Assets            $HOME/.config/assets"
 echo "    Zsh setup         $HOME/.zshrc (symlink), $HOME/.oh-my-zsh, default shell → bash"
-echo "    Packages          all from packages.txt except preserved packages"
+echo "    Packages          all from packages-core.txt and packages-optional.txt except preserved"
 echo
 echo "  Preserved (not touched):"
 echo "    sddm  hyprland  uwsm  kitty  yay  pacman-contrib"

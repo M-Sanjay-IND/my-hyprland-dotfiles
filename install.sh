@@ -122,12 +122,9 @@ link() {
 step "2/6  Symlinking $HOME/.config dirs"
 link "$DOTFILES/.config/hypr"       "$HOME/.config/hypr"
 link "$DOTFILES/.config/waybar"     "$HOME/.config/waybar"
-APPLY_KITTY_CONFIG=false
 if $INSTALL_KITTY; then
-    APPLY_KITTY_CONFIG=true
     link "$DOTFILES/.config/kitty" "$HOME/.config/kitty"
 fi
-export APPLY_KITTY_CONFIG
 link "$DOTFILES/.config/swaync"     "$HOME/.config/swaync"
 link "$DOTFILES/.config/rofi"       "$HOME/.config/rofi"
 link "$DOTFILES/.config/fastfetch"  "$HOME/.config/fastfetch"
@@ -155,8 +152,8 @@ if $INSTALL_ZSH; then
     link "$DOTFILES/.zshrc" "$HOME/.zshrc"
 
     # Change default shell to zsh if not already set
-    if [[ "$SHELL" != "$(which zsh)" ]]; then
-        chsh -s "$(which zsh)"
+    if [[ "$SHELL" != "$(command -v zsh)" ]]; then
+        chsh -s "$(command -v zsh)"
         info "Default shell changed to zsh (takes effect on next login)"
     else
         info "Default shell already zsh"
@@ -197,7 +194,7 @@ echo "  Icon theme and GTK theme — install separately if needed:"
 echo "    yay -S tela-circle-icon-theme-dracula-git"
 echo "    yay -S catppuccin-gtk-theme-mocha"
 
-# ── Step 5: Initialize theme ──────────────────────────────────────────────────
+# ── Step 6: Initialize theme ──────────────────────────────────────────────────
 step "6/6  Initializing macchiato theme"
 echo "  Running theme-switch.sh macchiato (safe outside Hyprland)..."
 bash "$DOTFILES/.config/waybar/scripts/theme-switch.sh" macchiato 2>/dev/null || true
