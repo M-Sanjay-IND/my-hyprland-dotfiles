@@ -124,6 +124,7 @@ link "$DOTFILES/.config/hypr"       "$HOME/.config/hypr"
 link "$DOTFILES/.config/waybar"     "$HOME/.config/waybar"
 if $INSTALL_KITTY; then
     link "$DOTFILES/.config/kitty" "$HOME/.config/kitty"
+    link "$DOTFILES/.config/yazi"  "$HOME/.config/yazi"
 fi
 link "$DOTFILES/.config/swaync"     "$HOME/.config/swaync"
 link "$DOTFILES/.config/rofi"       "$HOME/.config/rofi"

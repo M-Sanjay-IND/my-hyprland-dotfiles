@@ -54,7 +54,7 @@ unlink_if_ours() {
 
 # ── Step 1: Config symlinks ───────────────────────────────────────────────────
 step "1/5  Removing $HOME/.config symlinks"
-for dir in hypr waybar kitty swaync rofi fastfetch wlogout btop nvim; do
+for dir in hypr waybar kitty yazi swaync rofi fastfetch wlogout btop nvim; do
     unlink_if_ours "$HOME/.config/$dir"
 done
 
