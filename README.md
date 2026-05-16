@@ -72,6 +72,8 @@ Any future edit to the repo is reflected immediately — symlinks keep `~/.confi
 
 To add the BlackArch repository (optional), follow the official instructions at https://blackarch.org/downloads.html#install-repo
 
+If something does not work after install, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
+
 ---
 
 ## Uninstallation
@@ -176,8 +178,10 @@ my-hyprland-dotfiles/
 │   └── bin/                rofi-launcher, rofi-wallpaper, rofi-clipboard
 ├── assets/                 wallpapers, icon pack archive, GTK theme archive
 ├── screenshots/            preview GIFs for the README
-├── packages.txt            full package list (pacman/yay)
+├── packages-core.txt       required packages (always installed)
+├── packages-optional.txt   optional packages (Kitty, Zsh, Neovim — installer asks)
 ├── install.sh              installer — symlinks, packages, optional components
 ├── uninstall.sh            uninstaller — removes symlinks, assets, packages
-└── README.md
+├── README.md
+└── TROUBLESHOOTING.md      common issues and fixes
 ```

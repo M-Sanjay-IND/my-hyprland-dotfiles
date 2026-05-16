@@ -19,7 +19,8 @@ ask_yn() { local _a; read -rp "  $1 [Y/n] " _a; [[ -z "$_a" || "$_a" =~ ^[Yy]$ ]
 # ── Pre-flight checks ─────────────────────────────────────────────────────────
 [[ "$EUID" -eq 0 ]]         && die "Do not run as root."
 command -v pacman &>/dev/null || die "pacman not found — this installer is Arch Linux only."
-[[ -f "$DOTFILES/packages.txt" ]] || die "packages.txt not found in $DOTFILES"
+[[ -f "$DOTFILES/packages-core.txt" ]]     || die "packages-core.txt not found in $DOTFILES"
+[[ -f "$DOTFILES/packages-optional.txt" ]] || die "packages-optional.txt not found in $DOTFILES"
 
 # ── What this installs ────────────────────────────────────────────────────────
 echo -e "  Dotfiles from: ${CYAN}$DOTFILES${NC}"
@@ -74,7 +75,7 @@ while IFS= read -r line; do
     [[ " ${SKIP_PKGS[*]} " == *" $pkg "* ]] && continue
     (( total++ )) || true
     pacman -Q "$pkg" &>/dev/null || missing+=("$pkg")
-done < "$DOTFILES/packages.txt"
+done < <(cat "$DOTFILES/packages-core.txt" "$DOTFILES/packages-optional.txt")
 
 installed=$(( total - ${#missing[@]} ))
 echo "  $installed / $total packages already installed"

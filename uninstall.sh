@@ -18,7 +18,8 @@ step()  { echo -e "\n${CYAN}▶ $*${NC}"; }
 # ── Pre-flight checks ─────────────────────────────────────────────────────────
 [[ "$EUID" -eq 0 ]]               && die "Do not run as root."
 command -v pacman &>/dev/null     || die "pacman not found — Arch Linux only."
-[[ -f "$DOTFILES/packages.txt" ]] || die "packages.txt not found in $DOTFILES"
+[[ -f "$DOTFILES/packages-core.txt" ]]     || die "packages-core.txt not found in $DOTFILES"
+[[ -f "$DOTFILES/packages-optional.txt" ]] || die "packages-optional.txt not found in $DOTFILES"
 
 # ── What this removes ─────────────────────────────────────────────────────────
 echo -e "  Dotfiles from: ${CYAN}$DOTFILES${NC}"
@@ -113,7 +114,7 @@ while IFS= read -r line; do
     [[ " ${KEEP_PKGS[*]} " == *" $pkg "* ]] && continue
     pacman -Q "$pkg" &>/dev/null || continue
     to_remove+=("$pkg")
-done < "$DOTFILES/packages.txt"
+done < <(cat "$DOTFILES/packages-core.txt" "$DOTFILES/packages-optional.txt")
 
 if [[ ${#to_remove[@]} -eq 0 ]]; then
     info "No packages to remove."
