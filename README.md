@@ -28,15 +28,11 @@ Full workflow demo on r/unixporn: [My first Hyprland full dual setup, no preconf
 <table>
   <tr>
     <th>Catppuccin Macchiato</th>
-    <th>Matrix</th>
+    <th>Red on Black</th>
   </tr>
   <tr>
     <td><img src="screenshots/btop_catppuccin.png"/></td>
     <td><img src="screenshots/btop_matrix.png"/></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/swaync_catppuccin.png"/></td>
-    <td><img src="screenshots/swaync_matrix.png"/></td>
   </tr>
   <tr>
     <td><img src="screenshots/rofi_wallpaper_catppuccin.png"/></td>
