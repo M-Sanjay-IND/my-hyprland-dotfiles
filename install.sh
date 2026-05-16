@@ -41,6 +41,7 @@ echo "    hypridle          idle / power management daemon"
 echo "    yazi              terminal file manager (via kitty, optional)"
 echo "    awww              wallpaper daemon"
 echo "    cliphist          clipboard history (wl-paste)"
+echo "    extras            cava, extra fonts, vim, figlet, cmatrix, imv, ncdu... (optional)"
 echo
 echo "  Assets (copied to $HOME/.config/assets):"
 echo "    Wallpapers            whitehat/ + blackhat/ backgrounds"
@@ -55,12 +56,14 @@ echo
 if ask_yn "Install Kitty terminal?";  then INSTALL_KITTY=true; else INSTALL_KITTY=false; fi
 if ask_yn "Install Zsh + Oh My Zsh?"; then INSTALL_ZSH=true;   else INSTALL_ZSH=false;   fi
 if ask_yn "Install Neovim?";          then INSTALL_NVIM=true;   else INSTALL_NVIM=false;  fi
+if ask_yn "Install extras (cava, extra fonts, vim, figlet, cmatrix, imv, ncdu...)?"; then INSTALL_EXTRAS=true; else INSTALL_EXTRAS=false; fi
 echo
 
 SKIP_PKGS=()
-$INSTALL_KITTY || SKIP_PKGS+=(kitty yazi)
-$INSTALL_ZSH   || SKIP_PKGS+=(zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-theme-powerlevel10k-git)
-$INSTALL_NVIM  || SKIP_PKGS+=(neovim lazygit nodejs npm python-pip)
+$INSTALL_KITTY  || SKIP_PKGS+=(kitty yazi)
+$INSTALL_ZSH    || SKIP_PKGS+=(zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-theme-powerlevel10k-git)
+$INSTALL_NVIM   || SKIP_PKGS+=(neovim lazygit nodejs npm python-pip)
+$INSTALL_EXTRAS || SKIP_PKGS+=(figlet cmatrix hunspell-it ttf-firacode-nerd ttf-cascadia-code-nerd ttf-cascadia-mono-nerd ttf-iosevka-nerd ttf-iosevkaterm-nerd ttf-fira-mono ttf-fira-sans cava easyeffects vim ex-vi-compat imv ncdu iotop vimix-cursors)
 
 # ── Step 1: Package check ─────────────────────────────────────────────────────
 step "1/6  Checking packages"

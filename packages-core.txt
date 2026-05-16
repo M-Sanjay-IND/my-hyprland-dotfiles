@@ -38,8 +38,6 @@ alsa-utils
 pamixer
 pulsemixer
 pavucontrol
-easyeffects
-cava
 
 # theming
 nwg-look
@@ -50,17 +48,9 @@ qt6ct
 qt5-wayland
 qt6-wayland
 capitaine-cursors
-vimix-cursors
 
 # fonts
 ttf-jetbrains-mono-nerd
-ttf-firacode-nerd
-ttf-cascadia-code-nerd
-ttf-cascadia-mono-nerd
-ttf-iosevka-nerd
-ttf-iosevkaterm-nerd
-ttf-fira-mono
-ttf-fira-sans
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 noto-fonts-emoji
@@ -71,11 +61,8 @@ gvfs
 gvfs-mtp
 7zip
 unrar
-imv
-ncdu
 tree
 lsof
-iotop
 brightnessctl
 
 # bluetooth
@@ -87,23 +74,12 @@ blueman
 ufw
 openbsd-netcat
 
-# editors
-vim
-ex-vi-compat
-
 # build tools
 gcc
 make
-
-# terminal fun
-btop
-fastfetch
-figlet
-cmatrix
 
 # misc
 pacman-contrib
 yay
 git
 polkit-kde-agent
-hunspell-it

@@ -20,3 +20,23 @@ lazygit
 nodejs
 npm
 python-pip
+
+# extras — personal tools and utilities, not required for the rice to work
+figlet
+cmatrix
+hunspell-it
+ttf-firacode-nerd
+ttf-cascadia-code-nerd
+ttf-cascadia-mono-nerd
+ttf-iosevka-nerd
+ttf-iosevkaterm-nerd
+ttf-fira-mono
+ttf-fira-sans
+cava
+easyeffects
+vim
+ex-vi-compat
+imv
+ncdu
+iotop
+vimix-cursors
