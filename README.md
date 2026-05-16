@@ -14,6 +14,9 @@ The goal is a Hyprland setup that is ready for daily use out of a fresh Arch ins
 
 ![preview](screenshots/preview.gif)
 
+Full workflow demo on r/unixporn: [My first Hyprland — full dual setup, no preconfig](https://www.reddit.com/r/unixporn/comments/1t1uams/my_first_hyprland_full_dual_setup_no_preconfig_no/) 
+- New features has been added since that video -
+
 ---
 
 ## Components
