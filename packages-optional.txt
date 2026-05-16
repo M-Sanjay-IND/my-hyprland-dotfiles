@@ -14,12 +14,9 @@ zsh-syntax-highlighting
 zsh-theme-powerlevel10k-git
 
 # neovim — text editor with lazy.nvim, LSP, Treesitter
-# build deps: gcc + make for tree-sitter parsers and telescope-fzf-native
 # LSP runtime deps: nodejs+npm (bash/html/css/pyright), r (r-languageserver), python-pip (Mason fallback)
 neovim
 lazygit
-gcc
-make
 nodejs
 npm
 r

@@ -91,6 +91,10 @@ openbsd-netcat
 vim
 ex-vi-compat
 
+# build tools
+gcc
+make
+
 # terminal fun
 btop
 fastfetch
