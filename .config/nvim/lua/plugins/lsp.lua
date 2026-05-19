@@ -27,6 +27,7 @@ return {
       ensure_installed = {
         "pyright",               -- Python
         "r-languageserver",      -- R
+        "rust-analyzer",          -- Rust 
         "lua-language-server",   -- Lua
         "bash-language-server",  -- Bash / Shell
         "clangd",                -- C / C++
@@ -54,6 +55,9 @@ return {
 
       -- Python — static type checker + completions
       lspconfig.pyright.setup({ capabilities = capabilities })
+
+      -- Rust 
+      lspconfig.rust_analyzer.setup({ capabilities = capabilities })
 
       -- R — language server from CRAN
       lspconfig.r_language_server.setup({ capabilities = capabilities })
