@@ -160,6 +160,7 @@ Config lives in `.config/nvim/` and is symlinked to `~/.config/nvim` by the inst
 | C / C++ | clangd |
 | HTML | html-lsp |
 | CSS | css-lsp |
+| Rust | rust-analyzer |
 
 Remove the languages you do not use.
 
