@@ -7,7 +7,7 @@ vim.g.maplocalleader = " "
 local opt = vim.opt
 
 opt.clipboard = "unnamedplus" -- Sync with system clipboard (Wayland wl-clipboard)
-opt.relativenumber = true     -- Relative line numbers
+opt.relativenumber = false    -- Standard absolute line numbers (1, 2, 3...)
 opt.number = true             -- Show line number
 opt.cursorline = true         -- Highlight current line
 opt.wrap = false              -- No line wrapping by default

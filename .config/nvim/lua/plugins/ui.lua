@@ -72,16 +72,29 @@ return {
           end
           return " Copilot: On"
         end,
-        color = function()
-          local ok, client = pcall(require, "copilot.client")
-          if not ok or client.is_disabled() then
-            return { fg = "#6e738d" }
-          end
           return { fg = "#a6da95", gui = "bold" }
         end,
       })
 
+      -- Line location in lualine_z
+      opts.sections.lualine_z = {
+        { "location", padding = { left = 1, right = 1 } },
+      }
+
       return opts
     end,
+  },
+
+  -- Disable glitchy animated indentscope
+  {
+    "echasnovski/mini.indentscope",
+    opts = {
+      draw = {
+        delay = 0,
+        animation = function()
+          return 0
+        end,
+      },
+    },
   },
 }
