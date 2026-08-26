@@ -2,15 +2,14 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
+    event = { "InsertEnter", "BufReadPost", "BufNewFile" },
     opts = {
       suggestion = {
         enabled = true,
         auto_trigger = true,
-        hide_during_completion = true,
         debounce = 75,
         keymap = {
-          accept = "<Tab>", -- Tab to accept Copilot suggestion
+          accept = "<Tab>",
           accept_word = "<M-Right>",
           accept_line = "<M-Down>",
           next = "<M-]>",
@@ -20,34 +19,35 @@ return {
       },
       panel = { enabled = false },
       filetypes = {
-        markdown = true,
-        help = false,
+        ["*"] = true,
         gitcommit = false,
         gitrebase = false,
         ["."] = false,
       },
     },
-    keys = {
-      {
-        "<A-c>",
-        function()
-          local suggestion = require("copilot.suggestion")
-          suggestion.toggle_auto_trigger()
-          vim.notify("GitHub Copilot suggestions toggled", vim.log.levels.INFO, { title = "Copilot" })
-        end,
-        desc = "Toggle Copilot (Alt+C)",
-        mode = { "n", "i", "v" },
-      },
-      {
-        "<C-A-c>",
-        function()
-          local suggestion = require("copilot.suggestion")
-          suggestion.toggle_auto_trigger()
-          vim.notify("GitHub Copilot suggestions toggled", vim.log.levels.INFO, { title = "Copilot" })
-        end,
-        desc = "Toggle Copilot (Ctrl+Alt+C)",
-        mode = { "n", "i", "v" },
-      },
-    },
+    config = function(_, opts)
+      require("copilot").setup(opts)
+
+      local function toggle_copilot()
+        local client = require("copilot.client")
+        local cmd = require("copilot.command")
+        if client.is_disabled() then
+          cmd.enable()
+          vim.notify(" GitHub Copilot: Enabled", vim.log.levels.INFO, { title = "Copilot" })
+        else
+          cmd.disable()
+          vim.notify(" GitHub Copilot: Disabled", vim.log.levels.WARN, { title = "Copilot" })
+        end
+        -- Immediately refresh statusline
+        pcall(function()
+          require("lualine").refresh()
+        end)
+      end
+
+      -- Toggle mappings across all modes
+      vim.keymap.set({ "n", "i", "v" }, "<A-c>", toggle_copilot, { desc = "Toggle GitHub Copilot (Alt+C)" })
+      vim.keymap.set({ "n", "i", "v" }, "<C-A-c>", toggle_copilot, { desc = "Toggle GitHub Copilot (Ctrl+Alt+C)" })
+      vim.keymap.set("n", "<leader>uc", toggle_copilot, { desc = "Toggle Copilot" })
+    end,
   },
 }
