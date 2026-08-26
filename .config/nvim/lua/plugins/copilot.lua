@@ -1,4 +1,5 @@
 return {
+  -- Copilot Core
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -20,9 +21,6 @@ return {
       panel = { enabled = false },
       filetypes = {
         ["*"] = true,
-        gitcommit = false,
-        gitrebase = false,
-        ["."] = false,
       },
     },
     config = function(_, opts)
@@ -38,16 +36,38 @@ return {
           cmd.disable()
           vim.notify(" GitHub Copilot: Disabled", vim.log.levels.WARN, { title = "Copilot" })
         end
-        -- Immediately refresh statusline
         pcall(function()
           require("lualine").refresh()
         end)
       end
 
-      -- Toggle mappings across all modes
       vim.keymap.set({ "n", "i", "v" }, "<A-c>", toggle_copilot, { desc = "Toggle GitHub Copilot (Alt+C)" })
       vim.keymap.set({ "n", "i", "v" }, "<C-A-c>", toggle_copilot, { desc = "Toggle GitHub Copilot (Ctrl+Alt+C)" })
       vim.keymap.set("n", "<leader>uc", toggle_copilot, { desc = "Toggle Copilot" })
+    end,
+  },
+
+  -- Blink.cmp integration so Copilot suggestions appear in autocomplete popup
+  {
+    "giuxtaposition/blink-cmp-copilot",
+  },
+  {
+    "saghen/blink.cmp",
+    dependencies = { "giuxtaposition/blink-cmp-copilot" },
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      opts.sources.default = opts.sources.default or { "lsp", "path", "snippets", "buffer" }
+      if not vim.tbl_contains(opts.sources.default, "copilot") then
+        table.insert(opts.sources.default, "copilot")
+      end
+      opts.sources.providers = opts.sources.providers or {}
+      opts.sources.providers.copilot = {
+        name = "copilot",
+        module = "blink-cmp-copilot",
+        score_offset = 100,
+        async = true,
+      }
+      return opts
     end,
   },
 }
