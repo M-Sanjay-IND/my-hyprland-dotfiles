@@ -62,6 +62,25 @@ return {
         },
       }
 
+      -- Add Copilot status indicator to lualine_x
+      opts.sections.lualine_x = opts.sections.lualine_x or {}
+      table.insert(opts.sections.lualine_x, 1, {
+        function()
+          local ok, client = pcall(require, "copilot.client")
+          if not ok or client.is_disabled() then
+            return " Copilot: Off"
+          end
+          return " Copilot: On"
+        end,
+        color = function()
+          local ok, client = pcall(require, "copilot.client")
+          if not ok or client.is_disabled() then
+            return { fg = "#6e738d" }
+          end
+          return { fg = "#a6da95", gui = "bold" }
+        end,
+      })
+
       return opts
     end,
   },
