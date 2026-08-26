@@ -4,12 +4,12 @@ local map = vim.keymap.set
 
 -- ── 1. Direct Save (Ctrl+S & Ctrl+Shift+S) ──────────────────────────────────
 map("n", "<C-s>", "<cmd>w<cr>", { desc = "Save File" })
-map("i", "<C-s>", "<esc><cmd>w<cr>gi", { desc = "Save File (Stay in Insert Mode)" })
+map("i", "<C-s>", "<C-o>:w<CR>", { desc = "Save File (Stay in Insert Mode)" })
 map("v", "<C-s>", "<esc><cmd>w<cr>gv", { desc = "Save File" })
 map("x", "<C-s>", "<esc><cmd>w<cr>gv", { desc = "Save File" })
 
 map("n", "<C-S-s>", "<cmd>wa<cr>", { desc = "Save All Files" })
-map("i", "<C-S-s>", "<esc><cmd>wa<cr>gi", { desc = "Save All Files (Stay in Insert Mode)" })
+map("i", "<C-S-s>", "<C-o>:wa<CR>", { desc = "Save All Files (Stay in Insert Mode)" })
 map("v", "<C-S-s>", "<esc><cmd>wa<cr>gv", { desc = "Save All Files" })
 
 -- ── 2. Integrated Terminal (Ctrl+` or Ctrl+~ or Ctrl+J or F12) ───────────────
