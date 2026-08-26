@@ -5,7 +5,7 @@
 
 configuration {
     /* path assoluto: Hyprland non eredita ~/.local/bin nel PATH */
-    modi: "drun,window,clipboard:/home/kernel_x23_6/.local/bin/rofi-clipboard,emoji,calc";
+    modi: "drun,window,clipboard:/home/sanjaym/.local/bin/rofi-clipboard,emoji,calc";
 
     /* drun behavior */
     show-icons: true;

@@ -1,0 +1,1 @@
+/home/sanjaym/.config/hypr/themes/macchiato.lua

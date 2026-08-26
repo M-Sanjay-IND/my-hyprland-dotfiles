@@ -1,32 +1,69 @@
--- plugins/colorscheme.lua
--- Catppuccin Macchiato with transparent background.
--- Opacity and blur are managed by Hyprland on the kitty window —
--- Neovim intentionally sets no background color.
-
 return {
-  "catppuccin/nvim",
-  name     = "catppuccin",
-  priority = 1000, -- load before all other plugins so colors are set first
-  opts = {
-    flavour                = "macchiato",
-    transparent_background = true, -- removes Normal bg; Hyprland blur shows through
-    integrations = {
-      cmp             = true,
-      gitsigns        = true,
-      telescope       = { enabled = true },
-      treesitter      = true,
-      mason           = true,
-      indent_blankline = { enabled = true },
-      nvimtree        = true,
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      flavour = "macchiato", -- "macchiato" matches your desktop theme
+      transparent_background = true,
+      show_end_of_buffer = false,
+      term_colors = true,
+      dim_inactive = {
+        enabled = false,
+      },
+      integrations = {
+        aerial = true,
+        alpha = true,
+        blink_cmp = true,
+        cmp = true,
+        dashboard = true,
+        flash = true,
+        gitsigns = true,
+        headlines = true,
+        illuminate = true,
+        indent_blankline = { enabled = true },
+        leap = true,
+        lsp_trouble = true,
+        mason = true,
+        mini = true,
+        navic = { enabled = true },
+        neotree = true,
+        neotest = true,
+        noice = true,
+        notify = true,
+        semantic_tokens = true,
+        snacks = true,
+        telescope = true,
+        treesitter = true,
+        treesitter_context = true,
+        which_key = true,
+      },
+      custom_highlights = function(colors)
+        return {
+          Normal = { bg = "none" },
+          NormalFloat = { bg = "none" },
+          FloatBorder = { bg = "none", fg = colors.overlay0 },
+          FloatTitle = { bg = "none", fg = colors.lavender },
+          NormalNC = { bg = "none" },
+          SignColumn = { bg = "none" },
+          LineNr = { fg = colors.surface2 },
+          CursorLineNr = { fg = colors.peach, bold = true },
+          StatusLine = { bg = "none" },
+          StatusLineNC = { bg = "none" },
+          NeoTreeNormal = { bg = "none" },
+          NeoTreeNormalNC = { bg = "none" },
+          NvimTreeNormal = { bg = "none" },
+          NvimTreeNormalNC = { bg = "none" },
+          SnacksDashboardNormal = { bg = "none" },
+        }
+      end,
     },
   },
-  config = function(_, opts)
-    require("catppuccin").setup(opts)
-    vim.cmd.colorscheme("catppuccin")
-
-    -- Belt-and-suspenders: clear any bg that catppuccin might leave on floats
-    vim.api.nvim_set_hl(0, "Normal",      { bg = "none" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NormalNC",    { bg = "none" })
-  end,
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin",
+    },
+  },
 }

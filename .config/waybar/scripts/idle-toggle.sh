@@ -5,11 +5,11 @@ set -euo pipefail
 
 if pgrep -x hypridle &>/dev/null; then
   pkill hypridle
-  notify-send -i system-suspend "Idle inhibitor" "ATTIVO — schermo non si blocca"
+  notify-send -i system-suspend "Idle Inhibitor" "ENABLED — Screen will stay awake (no lock/sleep)"
 else
   hypridle &
   disown
-  notify-send -i system-shutdown "Idle inhibitor" "DISATTIVO — lock/sleep normali"
+  notify-send -i system-shutdown "Idle Inhibitor" "DISABLED — Normal auto-lock & sleep active"
 fi
 
 # Aggiorna icona waybar

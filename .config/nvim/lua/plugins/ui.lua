@@ -1,42 +1,68 @@
--- plugins/ui.lua
--- Status line and indentation guides.
---   lualine         → bottom status bar with catppuccin theme
---   indent-blankline → vertical lines on indent levels
-
 return {
-  -- ── Status line ─────────────────────────────────────────────────────────────
+  -- Custom Dashboard Header
   {
-    "nvim-lualine/lualine.nvim",
+    "folke/snacks.nvim",
     opts = {
-      options = {
-        theme              = "catppuccin-mocha", -- matches the colorscheme
-        globalstatus       = true,         -- one statusline for all windows
-        -- Powerline-style separators (require a Nerd Font — already in packages.txt)
-        section_separators = { left = "", right = "" },
-        component_separators = "|",
-      },
-      sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { { "filename", path = 1 } }, -- 1 = relative path
-        lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
+      dashboard = {
+        preset = {
+          header = [[
+   █████████                                          
+  ███░░░░░███                                         
+ ░███    ░░░   ██████   ██████  ████████  █████ █████ 
+ ░░█████████  ░░░░░███ ░░░░░███░░███░░███░░███ ░░███  
+  ░░░░░░░░███  ███████  ███████ ░███ ░░░  ░███  ░███  
+  ███    ░███ ███░░███ ███░░███ ░███      ░░███ ███   
+ ░░█████████ ░░████████░░████████████      ░░█████    
+  ░░░░░░░░░   ░░░░░░░░  ░░░░░░░░░░░░        ░░░░░     
+          ─── N E O V I M  •  L A Z Y V I M ───       
+          ]],
+        },
       },
     },
   },
 
-  -- ── Indentation guides ───────────────────────────────────────────────────────
+  -- Clean, Informative Lualine Statusline
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",  -- v3 API: the module is `ibl`, not `indent_blankline`
-    opts = {
-      indent = {
-        char = "│", -- thin vertical bar; catppuccin colors it via the IblIndent hl group
-      },
-      scope = {
-        enabled = true, -- highlight the current indent scope differently
-      },
-    },
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      opts.options = opts.options or {}
+      opts.options.theme = "auto"
+      opts.options.component_separators = { left = "│", right = "│" }
+      opts.options.section_separators = { left = "", right = "" }
+
+      -- Add directory badge to lualine_c
+      opts.sections = opts.sections or {}
+      opts.sections.lualine_c = {
+        {
+          function()
+            local dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+            return "📁 " .. dir
+          end,
+          color = { fg = "#8bd5ca", gui = "bold" },
+        },
+        {
+          "filename",
+          file_status = true,
+          path = 1, -- relative path
+          symbols = {
+            modified = " 󰏫 (unsaved)",
+            readonly = " 󰌾 (readonly)",
+            unnamed = "[No Name]",
+            newfile = " 󰝒 (new)",
+          },
+        },
+        {
+          "diagnostics",
+          symbols = {
+            error = " ",
+            warn = " ",
+            info = " ",
+            hint = " ",
+          },
+        },
+      }
+
+      return opts
+    end,
   },
 }

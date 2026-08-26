@@ -64,16 +64,16 @@
       "text": "Do Not Disturb"
     },
     "buttons-grid": {
-      "buttons-per-row": 4,
+      "buttons-per-row": 2,
       "actions": [
-        { "label": "󰐥", "command": "wlogout -p layer-shell -C /home/kernel_x23_6/.config/wlogout/style.css -l /home/kernel_x23_6/.config/wlogout/layout -b 5" },
-        { "label": "󰌾", "command": "hyprlock" },
-        { "label": "󰕾", "command": "pamixer -t" },
-        { "label": "󰍬", "command": "pamixer --default-source -t" },
-        { "label": "󰄀", "command": "grimblast --notify copysave area" },
-        { "label": "🖼", "command": "awww img $(find $(cat ~/.config/rofi/.wall_dir) -type f | shuf -n1) --transition-type random" },
-        { "label": "󰤨", "command": "kitty --class floating-tool -e nmtui" },
-        { "label": "󰂱", "command": "kitty --class floating-tool -e bluetuith" }
+        { "label": "󰐥  Power Menu", "command": "wlogout -p layer-shell -C /home/sanjaym/.config/wlogout/style.css -l /home/sanjaym/.config/wlogout/layout -b 5" },
+        { "label": "󰌾  Lock Screen", "command": "hyprlock" },
+        { "label": "󰕾  Toggle Audio", "command": "pamixer -t" },
+        { "label": "󰍬  Toggle Mic", "command": "pamixer --default-source -t" },
+        { "label": "󰄀  Screenshot", "command": "grimblast --notify copysave area" },
+        { "label": "🖼  New Wallpaper", "command": "awww img $(find $(cat ~/.config/rofi/.wall_dir) -type f | shuf -n1) --transition-type random" },
+        { "label": "󰤨  Wi-Fi / Net", "command": "kitty --class floating-tool -e nmtui" },
+        { "label": "󰂱  Bluetooth", "command": "sh -c 'command -v bluetuith >/dev/null && kitty --class floating-tool -e bluetuith || kitty --class floating-tool -e bluetoothctl'" }
       ]
     },
     "volume": {
@@ -91,7 +91,7 @@
     },
     "backlight": {
       "label": "󰃞",
-      "device": "intel_backlight",
+      "device": "amdgpu_bl2",
       "subsystem": "backlight",
       "min": 1
     },

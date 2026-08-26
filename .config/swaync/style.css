@@ -238,9 +238,9 @@ scrollbar slider {
   color: @text;
   border-radius: 9px;
   border: 1px solid alpha(@surface1, 0.65);
-  padding: 10px 13px;
+  padding: 9px 8px;
   margin: 3px;
-  font-size: 16px;
+  font-size: 13px;
   min-width: 38px;
 }
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
@@ -288,7 +288,7 @@ scrollbar slider {
   background: alpha(@mantle, 0.86);
   border: 1px solid alpha(@surface1, 0.58);
   border-radius: 10px;
-  padding: 10px;
+  padding: 7px;
   margin: 4px;
   color: @text;
 }
@@ -297,7 +297,7 @@ scrollbar slider {
 .widget-slider trough {
   background: alpha(@surface0, 0.92);
   border-radius: 6px;
-  min-height: 8px;
+  min-height: 5px;
   border: none;
 }
 .widget-volume highlight {
@@ -318,8 +318,8 @@ scrollbar slider {
   background: @text;
   border: 2px solid @base;
   border-radius: 100%;
-  min-width: 14px;
-  min-height: 14px;
+  min-width: 12px;
+  min-height: 12px;
   margin: -4px 0;
 }
 .widget-volume > box > button,
@@ -329,8 +329,8 @@ scrollbar slider {
   color: @text;
   border: 1px solid alpha(@surface1, 0.72);
   border-radius: 8px;
-  min-width: 30px;
-  min-height: 30px;
+  min-width: 26px;
+  min-height: 26px;
 }
 .widget-volume > box > button:hover,
 .widget-backlight > box > button:hover,

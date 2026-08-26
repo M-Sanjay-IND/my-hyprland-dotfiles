@@ -1,62 +1,81 @@
-# Enable Powerlevel10k instant prompt (must stay near top)
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# ==============================================================================
+# Oh My Zsh & Plugins Setup
+# ==============================================================================
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$HOME/.cargo/bin:/usr/local/bin:$PATH"
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+ZSH_CUSTOM="$ZSH/custom"
+
+# Install Oh-My-Zsh if it doesn't exist
+if [ ! -d "$ZSH" ]; then
+  echo "Installing Oh-My-Zsh..."
+  git clone https://github.com/ohmyzsh/ohmyzsh.git "$ZSH" >/dev/null 2>&1
 fi
 
-# PATH
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+# Auto-fetch necessary plugins if they don't exist
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+  echo "Installing zsh-autosuggestions..."
+  git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions" >/dev/null 2>&1
+fi
 
-# History
-HISTFILE=~/.zsh_history
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+  echo "Installing zsh-syntax-highlighting..."
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" >/dev/null 2>&1
+fi
+
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
+
+# ==============================================================================
+# History Configuration
+# ==============================================================================
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
-setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS
 
-# Completion system
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-setopt nocaseglob nocasematch
+setopt HIST_IGNORE_ALL_DUPS
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 
-# Colori per ls / grep / diff (popola LS_COLORS e abilita --color=auto)
-eval "$(dircolors -b)"
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias diff='diff --color=auto'
+# ==============================================================================
+# Custom Functions
+# ==============================================================================
 
-# Arrow-key history search (matches on already-typed prefix)
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey '^[[A' up-line-or-beginning-search
-bindkey '^[[B' down-line-or-beginning-search
+# Automatically list directory contents upon changing directories
+cd() {
+  builtin cd "$@" && ls
+}
 
-# Plugins
-[[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && \
-  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# ==============================================================================
+# Execute Fastfetch on Interactive Terminal Startup & Clear
+# ==============================================================================
+if [[ -o interactive ]] && command -v fastfetch &>/dev/null; then
+  fastfetch
+fi
 
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#005500'
+# Sustain Fastfetch design after running 'clear' or 'cls'
+clear() {
+  command clear
+  if command -v fastfetch &>/dev/null; then
+    fastfetch
+  fi
+}
+alias cls="clear"
 
-# Syntax highlighting (deve stare per ultimo)
-[[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
-  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Redraw Fastfetch on Ctrl+L clear
+function clear-screen-and-fetch() {
+  command clear
+  if command -v fastfetch &>/dev/null; then
+    fastfetch
+  fi
+  zle reset-prompt
+}
+zle -N clear-screen-and-fetch
+bindkey '^L' clear-screen-and-fetch
 
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#FF5555,bold'
-ZSH_HIGHLIGHT_STYLES[command]='fg=#39FF14,bold'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=#00FFAA,bold'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=#00FFAA,bold'
-ZSH_HIGHLIGHT_STYLES[function]='fg=#00FFAA,bold'
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=#FFDD00,bold'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=#CCAA00'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=#CCAA00'
-ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=#CCAA00'
-ZSH_HIGHLIGHT_STYLES[comment]='fg=#005500'
-ZSH_HIGHLIGHT_STYLES[path]='fg=#00FF41,underline'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=#00DDBB'
-
-# Powerlevel10k theme
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+# Load User Aliases
+source /home/sanjaym/.config/zsh/user_aliases.zsh
+stty -ixon 2>/dev/null

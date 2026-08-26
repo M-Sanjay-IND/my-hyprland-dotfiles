@@ -133,7 +133,7 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "return-type": "json",
-    "tooltip-format": "Notifiche: {}\nLeft: apri · Right: DND",
+    "tooltip-format": "Notifications: {}\nLeft-click: Open · Right-click: Toggle DND",
     "escape": true
   },
 
@@ -216,7 +216,7 @@
 
   // ─── POWER ────────────────────────────────────────────────────────────
   "backlight": {
-    "device": "intel_backlight",
+    "device": "amdgpu_bl2",
     "format": "{icon} {percent}%",
     "format-icons": ["", "", "", "", ""],
     "on-scroll-up": "brightnessctl set +5%",
@@ -267,7 +267,7 @@
     "on-click": "~/.config/waybar/scripts/idle-toggle.sh",
     "signal": 8,
     "tooltip": true,
-    "tooltip-format": "Idle inhibitor — ☕ attivo (schermo non si blocca) · 󰒲 disattivo"
+    "tooltip-format": "Idle Inhibitor — ☕ Active (Screen stays awake) · 󰒲 Inactive (Normal sleep/lock)"
   },
 
   "custom/weather": {
