@@ -116,8 +116,8 @@ map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Tab" })
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Previous Tab" })
 
 -- ── 9. Side-by-Side Splits (Ctrl+\, Ctrl+-) ─────────────────────────────────
-map({ "n", "i" }, "<C-\\>", "<cmd>vsplit<cr>", { desc = "Split Side-by-Side (Vertical)" })
-map({ "n", "i" }, "<C-->", "<cmd>split<cr>", { desc = "Split Horizontal" })
+map("n", "<C-\\>", "<cmd>vsplit<cr>", { desc = "Split Side-by-Side (Vertical)" })
+map("n", "<C-->", "<cmd>split<cr>", { desc = "Split Horizontal" })
 
 -- ── 10. Comments (Ctrl+/) ───────────────────────────────────────────────────
 map({ "n", "i" }, "<C-/>", function()
