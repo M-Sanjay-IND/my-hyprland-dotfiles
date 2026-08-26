@@ -72,6 +72,11 @@ return {
           end
           return " Copilot: On"
         end,
+        color = function()
+          local ok, client = pcall(require, "copilot.client")
+          if not ok or client.is_disabled() then
+            return { fg = "#6e738d" }
+          end
           return { fg = "#a6da95", gui = "bold" }
         end,
       })
@@ -87,7 +92,7 @@ return {
 
   -- Disable glitchy animated indentscope
   {
-    "echasnovski/mini.indentscope",
+    "nvim-mini/mini.indentscope",
     opts = {
       draw = {
         delay = 0,
