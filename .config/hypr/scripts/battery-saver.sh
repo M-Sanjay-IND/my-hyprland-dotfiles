@@ -16,6 +16,11 @@ if [ "$CURRENT_STATE" = "off" ]; then
     asusctl profile set Quiet 2>/dev/null || true
     powerprofilesctl set power-saver 2>/dev/null || true
 
+    # Force AMD CPU energy performance preference to maximum power savings
+    for epp in /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference; do
+        [ -f "$epp" ] && echo "power" > "$epp" 2>/dev/null || true
+    done
+
     # Turn off keyboard RGB to save power
     asusctl leds set off 2>/dev/null || true
 
@@ -27,7 +32,7 @@ if [ "$CURRENT_STATE" = "off" ]; then
     hyprctl keyword monitor "eDP-1, preferred@60, auto, 1.25" 2>/dev/null || true
 
     # Send rich notification
-    notify-send -u normal -i "battery-good" "🔋 Ultra Battery Saver" "ENABLED\n• Quiet Profile (Low TDP)\n• 60Hz Display Refresh\n• GPU Blur & Animations OFF\n• Keyboard RGB OFF"
+    notify-send -u normal -i "battery-good" "🔋 Ultra Battery Saver" "ENABLED\n• Power Draw Dropped\n• Quiet Profile (Low TDP)\n• 60Hz Display Refresh\n• CPU EPP: Power\n• GPU Blur & RGB OFF"
 else
     # ── 2. Disable & Restore Normal Mode ──────────────────────────────────────
     echo "off" > "$STATE_FILE"
@@ -35,6 +40,11 @@ else
     # Restore ASUS profile to Balanced
     asusctl profile set Balanced 2>/dev/null || true
     powerprofilesctl set balanced 2>/dev/null || true
+
+    # Restore AMD CPU energy performance preference
+    for epp in /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference; do
+        [ -f "$epp" ] && echo "balance_performance" > "$epp" 2>/dev/null || true
+    done
 
     # Restore keyboard RGB
     asusctl leds set med 2>/dev/null || true
