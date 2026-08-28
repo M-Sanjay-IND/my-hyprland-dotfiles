@@ -34,6 +34,10 @@
       "state": "transient",
       "app-name": "System",
       "summary": "^(Volume|Audio|Brightness|Microphone)$"
+    },
+    "dgpu-popup": {
+      "state": "ignored",
+      "summary": ".*(dGPU|dgpu|GPU Mode|Graphics Mode).*"
     }
   },
   "widgets": [
