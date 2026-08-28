@@ -121,3 +121,12 @@ hl.window_rule({
     size   = { 880, 840 },
     pin    = true,
 })
+
+-- ROG Control Center: floating, centered
+hl.window_rule({
+    name   = "rog-control-center-float",
+    match  = { class = "^(rog-control-center|Rog-control-center)$" },
+    float  = true,
+    center = true,
+    size   = { 1000, 700 },
+})
