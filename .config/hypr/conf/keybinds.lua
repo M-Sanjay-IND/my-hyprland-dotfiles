@@ -15,8 +15,10 @@ local menu        = home .. "/.local/bin/rofi-launcher -show drun -modi 'drun,wi
 
 -- ── 1. App Launches ─────────────────────────────────────────────────────────
 hl.bind(mainMod .. " + space",       function() hl.exec_cmd(menu) end)
+hl.bind("ALT + space",               function() hl.exec_cmd(menu) end)
 hl.bind(mainMod .. " + a",           function() hl.exec_cmd(menu) end)
 hl.bind(mainMod .. " + t",           function() hl.exec_cmd(terminal) end)
+hl.bind("CTRL + ALT + t",            function() hl.exec_cmd(terminal) end)
 hl.bind(mainMod .. " + b",           function() hl.exec_cmd(browser) end)
 hl.bind(mainMod .. " + SHIFT + b",   function() hl.exec_cmd("firefox -P pentest --no-remote") end)
 hl.bind(mainMod .. " + o",           function() hl.exec_cmd(notes) end)
@@ -30,6 +32,7 @@ hl.bind(mainMod .. " + SHIFT + w",   function() hl.exec_cmd(home .. "/.local/bin
 
 -- ── 2. Window Management ────────────────────────────────────────────────────
 hl.bind(mainMod .. " + q",           function() hl.dispatch(hl.dsp.window.close()) end)
+hl.bind("ALT + F4",                  function() hl.dispatch(hl.dsp.window.close()) end)
 hl.bind(mainMod .. " + w",           function() hl.dispatch(hl.dsp.window.float({ action = "toggle" })) end)
 hl.bind(mainMod .. " + SHIFT + f",   function() hl.dispatch(hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })) end)
 hl.bind(mainMod .. " + ALT + f",     function() hl.dispatch(hl.dsp.window.fullscreen({ mode = "maximized",  action = "toggle" })) end)
