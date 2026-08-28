@@ -168,3 +168,7 @@ hl.bind("XF86Launch1", hl.dsp.exec_cmd("rog-control-center"))
 -- Fan / Profile Key (Fn+F5 / M3): Cycles Power Modes (Quiet -> Balanced -> Performance)
 hl.bind("XF86Launch4", hl.dsp.exec_cmd("sh -c 'asusctl profile next && notify-send -u low -i preferences-system-power \"ROG Power Mode\" \"$(asusctl profile get | grep \"Active profile\" | cut -d: -f2)\"'"))
 hl.bind(mainMod .. " + F5", hl.dsp.exec_cmd("sh -c 'asusctl profile next && notify-send -u low -i preferences-system-power \"ROG Power Mode\" \"$(asusctl profile get | grep \"Active profile\" | cut -d: -f2)\"'"))
+
+-- ── Custom Ultra Battery Saver Toggle (SUPER + SHIFT + E & SUPER + F6) ──────
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/battery-saver.sh"))
+hl.bind(mainMod .. " + F6",        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/battery-saver.sh"))
