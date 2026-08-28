@@ -13,7 +13,8 @@ if [ -f "$CONFIG_FILE" ]; then
     sed -i 's/change_platform_profile_on_ac: true/change_platform_profile_on_ac: false/g' "$CONFIG_FILE"
     sed -i 's/disable_nvidia_powerd_on_battery: true/disable_nvidia_powerd_on_battery: false/g' "$CONFIG_FILE"
     systemctl restart asusd.service
-    echo "✓ Successfully locked ASUS dGPU & power modes to manual control only!"
+    systemctl enable --now supergfxd.service
+    echo "✓ Successfully configured ASUS power modes & enabled supergfxd GPU controller!"
 else
     echo "Error: $CONFIG_FILE not found"
     exit 1
