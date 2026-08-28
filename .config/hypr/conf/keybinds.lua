@@ -56,11 +56,14 @@ hl.bind(mainMod .. " + C", hl.dsp.window.center())
 hl.bind("ALT + Tab",         hl.dsp.window.cycle_next())
 hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({ next = false }))
 
--- Focus with arrow keys
+-- Focus with arrow keys & vim
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up"    }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down"  }))
+hl.bind(mainMod .. " + H",     hl.dsp.focus({ direction = "left"  }))
+hl.bind(mainMod .. " + L",     hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + K",     hl.dsp.focus({ direction = "up"    }))
 
 -- Move window in layout (arrows + vim)
 hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "left"  }))
