@@ -161,3 +161,10 @@ hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(
 -- Theme switch
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/theme-switch.sh matrix"))
 hl.bind(mainMod .. " + CTRL + I",  hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/theme-switch.sh macchiato"))
+
+-- ── ASUS ROG Zephyrus Hardware Keys ──────────────────────────────────────────
+-- ROG Key (M4 button): Opens ROG Control Center GUI
+hl.bind("XF86Launch1", hl.dsp.exec_cmd("rog-control-center"))
+-- Fan / Profile Key (Fn+F5 / M3): Cycles Power Modes (Quiet -> Balanced -> Performance)
+hl.bind("XF86Launch4", hl.dsp.exec_cmd("sh -c 'asusctl profile next && notify-send -u low -i preferences-system-power \"ROG Power Mode\" \"$(asusctl profile get | grep \"Active profile\" | cut -d: -f2)\"'"))
+hl.bind(mainMod .. " + F5", hl.dsp.exec_cmd("sh -c 'asusctl profile next && notify-send -u low -i preferences-system-power \"ROG Power Mode\" \"$(asusctl profile get | grep \"Active profile\" | cut -d: -f2)\"'"))
