@@ -50,7 +50,7 @@ hl.bind(mainMod .. " + ALT + F",     hl.dsp.window.fullscreen({ mode = "maximize
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
 
 -- Center floating window
-hl.bind(mainMod .. " + SPACE", hl.dsp.window.center())
+hl.bind(mainMod .. " + C", hl.dsp.window.center())
 
 -- Alt-Tab: cycle windows (prev/next) and bring to top
 hl.bind("ALT + Tab",         hl.dsp.window.cycle_next())
