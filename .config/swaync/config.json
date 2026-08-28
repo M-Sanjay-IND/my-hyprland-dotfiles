@@ -37,7 +37,11 @@
     },
     "dgpu-popup": {
       "state": "ignored",
-      "summary": ".*(dGPU|dgpu|GPU Mode|Graphics Mode).*"
+      "summary": ".*(dGPU|dgpu|GPU Mode|Graphics Mode|Optimus|status changed).*"
+    },
+    "rog-control-center-popups": {
+      "state": "ignored",
+      "app-name": "^(ROG Control Center|rog-control-center)$"
     }
   },
   "widgets": [
