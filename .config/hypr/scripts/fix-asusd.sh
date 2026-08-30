@@ -9,12 +9,16 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 if [ -f "$CONFIG_FILE" ]; then
-    sed -i 's/change_platform_profile_on_battery: true/change_platform_profile_on_battery: false/g' "$CONFIG_FILE"
-    sed -i 's/change_platform_profile_on_ac: true/change_platform_profile_on_ac: false/g' "$CONFIG_FILE"
-    sed -i 's/disable_nvidia_powerd_on_battery: true/disable_nvidia_powerd_on_battery: false/g' "$CONFIG_FILE"
+    sed -i 's/change_platform_profile_on_battery: .*/change_platform_profile_on_battery: true,/g' "$CONFIG_FILE"
+    sed -i 's/change_platform_profile_on_ac: .*/change_platform_profile_on_ac: true,/g' "$CONFIG_FILE"
+    sed -i 's/platform_profile_on_battery: .*/platform_profile_on_battery: Quiet,/g' "$CONFIG_FILE"
+    sed -i 's/platform_profile_on_ac: .*/platform_profile_on_ac: Performance,/g' "$CONFIG_FILE"
+    sed -i 's/platform_profile_linked_epp: .*/platform_profile_linked_epp: true,/g' "$CONFIG_FILE"
+    sed -i 's|ac_command: .*|ac_command: "/home/sanjaym/.config/hypr/scripts/power-state-trigger.sh ac",|g' "$CONFIG_FILE"
+    sed -i 's|bat_command: .*|bat_command: "/home/sanjaym/.config/hypr/scripts/power-state-trigger.sh battery",|g' "$CONFIG_FILE"
     systemctl restart asusd.service
     systemctl enable --now supergfxd.service
-    echo "✓ Successfully configured ASUS power modes & enabled supergfxd GPU controller!"
+    echo "✓ Successfully enabled automatic AC Performance & Battery Eco switching!"
 else
     echo "Error: $CONFIG_FILE not found"
     exit 1
