@@ -1,30 +1,29 @@
 /* ─────────────────────────────────────────────────────────
-   SwayNC — Matrix / BlackArch Red
-   Palette aligned with Waybar and Rofi matrix themes.
+   SwayNC — Catppuccin Macchiato
    ───────────────────────────────────────────────────────── */
 
 /* Palette */
-@define-color base       #080000;
-@define-color mantle     #050000;
-@define-color crust      #020000;
-@define-color surface0   #160404;
-@define-color surface1   #1e0606;
-@define-color surface2   #280808;
-@define-color text       #cc3344;
-@define-color subtext0   #994455;
-@define-color overlay0   #6b2030;
-@define-color pink       #ff4455;
-@define-color mauve      #ff4455;
-@define-color red        #ff4455;
-@define-color maroon     #ff6677;
-@define-color peach      #ff8040;
-@define-color yellow     #ffdd44;
-@define-color green      #ff4455;
-@define-color teal       #cc3344;
-@define-color sky        #ff8040;
-@define-color sapphire   #cc3344;
-@define-color blue       #cc3344;
-@define-color lavender   #ff6677;
+@define-color base       #24273a;
+@define-color mantle     #1e2030;
+@define-color crust      #181926;
+@define-color surface0   #363a4f;
+@define-color surface1   #494d64;
+@define-color surface2   #5b6078;
+@define-color text       #cad3f5;
+@define-color subtext0   #a5adcb;
+@define-color overlay0   #6e738d;
+@define-color pink       #f5bde6;
+@define-color mauve      #c6a0f6;
+@define-color red        #ed8796;
+@define-color maroon     #ee99a0;
+@define-color peach      #f5a97f;
+@define-color yellow     #eed49f;
+@define-color green      #a6da95;
+@define-color teal       #8bd5ca;
+@define-color sky        #91d7e3;
+@define-color sapphire   #7dc4e4;
+@define-color blue       #8aadf4;
+@define-color lavender   #b7bdf8;
 
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
@@ -48,26 +47,26 @@ scrollbar slider {
 }
 .notification {
   background: alpha(@base, 0.93);
-  border-radius: 4px;
+  border-radius: 12px;
   margin: 6px 10px;
   border: 1px solid alpha(@surface1, 0.78);
-  border-left: 3px solid @red;
-  box-shadow: 0 12px 34px alpha(@crust, 0.58);
+  border-left: 3px solid @lavender;
+  box-shadow: 0 12px 34px alpha(@crust, 0.38);
   transition: background 150ms ease, border-color 150ms ease;
 }
 .notification:hover {
   background: alpha(@mantle, 0.96);
-  border-color: alpha(@red, 0.72);
+  border-color: alpha(@lavender, 0.62);
 }
 .notification.low {
   border-left-color: @overlay0;
 }
 .notification.critical {
-  border-left-color: @yellow;
-  background: alpha(@red, 0.18);
-  border-top-color: alpha(@yellow, 0.35);
-  border-right-color: alpha(@yellow, 0.35);
-  border-bottom-color: alpha(@yellow, 0.35);
+  border-left-color: @red;
+  background: alpha(@red, 0.16);
+  border-top-color: alpha(@red, 0.25);
+  border-right-color: alpha(@red, 0.25);
+  border-bottom-color: alpha(@red, 0.25);
 }
 .notification-default-action {
   border-radius: 12px;
@@ -83,7 +82,7 @@ scrollbar slider {
 }
 .notification .summary {
   font-weight: bold;
-  color: @red;
+  color: @lavender;
   font-size: 13px;
 }
 .notification .time {
@@ -107,7 +106,7 @@ scrollbar slider {
 }
 .notification-action:hover {
   background: @surface1;
-  color: @red;
+  color: @lavender;
 }
 .inline-reply {
   margin: 8px 6px 8px;
@@ -168,7 +167,7 @@ scrollbar slider {
 /* Control Center pannello */
 .control-center {
   background: alpha(@base, 0.88);
-  border-radius: 4px;
+  border-radius: 14px;
   border: 1px solid alpha(@surface1, 0.82);
   padding: 12px;
   box-shadow: 0 18px 44px alpha(@crust, 0.46);
@@ -193,13 +192,13 @@ scrollbar slider {
 .widget-title > button {
   font-size: 12px;
   color: @base;
-  background: @red;
-  border-radius: 3px;
+  background: @lavender;
+  border-radius: 8px;
   padding: 5px 12px;
   border: none;
 }
 .widget-title > button:hover {
-  background: @yellow;
+  background: @pink;
   color: @base;
 }
 
@@ -207,7 +206,7 @@ scrollbar slider {
 .widget-dnd {
   background: alpha(@mantle, 0.82);
   border: 1px solid alpha(@surface1, 0.58);
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 8px 10px;
   margin: 4px;
   font-size: 13px;
@@ -215,29 +214,29 @@ scrollbar slider {
 }
 .widget-dnd > switch {
   background: alpha(@surface0, 0.92);
-  border-radius: 4px;
+  border-radius: 12px;
   border: none;
 }
 .widget-dnd > switch:checked {
-  background: @red;
+  background: @green;
 }
 .widget-dnd > switch slider {
   background: @text;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 /* Buttons grid */
 .widget-buttons-grid {
   background: alpha(@mantle, 0.86);
   border: 1px solid alpha(@surface1, 0.58);
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 9px;
   margin: 4px;
 }
 .widget-buttons-grid > flowbox > flowboxchild > button {
   background: alpha(@surface0, 0.94);
   color: @text;
-  border-radius: 3px;
+  border-radius: 9px;
   border: 1px solid alpha(@surface1, 0.65);
   padding: 9px 8px;
   margin: 3px;
@@ -246,12 +245,12 @@ scrollbar slider {
 }
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
   background: alpha(@surface1, 0.98);
-  color: @red;
-  border-color: alpha(@red, 0.55);
+  color: @lavender;
+  border-color: alpha(@lavender, 0.45);
 }
 .widget-buttons-grid > flowbox > flowboxchild:nth-child(1) > button:hover {
-  background: alpha(@yellow, 0.22);
-  color: @yellow;
+  background: alpha(@red, 0.3);
+  color: @red;
 }
 .widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button:hover {
   background: alpha(@blue, 0.3);
@@ -288,7 +287,7 @@ scrollbar slider {
 .widget-slider {
   background: alpha(@mantle, 0.86);
   border: 1px solid alpha(@surface1, 0.58);
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 7px;
   margin: 4px;
   color: @text;
@@ -302,23 +301,23 @@ scrollbar slider {
   border: none;
 }
 .widget-volume highlight {
-  background: @red;
-  border-radius: 2px;
+  background: @green;
+  border-radius: 6px;
 }
 .widget-backlight highlight {
   background: @peach;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 .widget-slider highlight {
   background: @maroon;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 .widget-volume slider,
 .widget-backlight slider,
 .widget-slider slider {
   background: @text;
   border: 2px solid @base;
-  border-radius: 2px;
+  border-radius: 100%;
   min-width: 12px;
   min-height: 12px;
   margin: -4px 0;
@@ -329,7 +328,7 @@ scrollbar slider {
   background: alpha(@surface0, 0.94);
   color: @text;
   border: 1px solid alpha(@surface1, 0.72);
-  border-radius: 3px;
+  border-radius: 8px;
   min-width: 26px;
   min-height: 26px;
 }
@@ -337,12 +336,12 @@ scrollbar slider {
 .widget-backlight > box > button:hover,
 .widget-slider > box > button:hover {
   background: @surface1;
-  color: @red;
+  color: @lavender;
 }
 .per-app-volume {
   background: alpha(@base, 0.9);
   border: 1px solid alpha(@surface1, 0.55);
-  border-radius: 4px;
+  border-radius: 10px;
   margin: 0 4px 8px;
   padding: 8px;
   color: @text;
@@ -352,19 +351,19 @@ scrollbar slider {
 .widget-mpris {
   background: alpha(@mantle, 0.86);
   border: 1px solid alpha(@surface1, 0.58);
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 10px;
   margin: 4px;
   color: @text;
 }
 .widget-mpris-player {
   background: alpha(@surface0, 0.94);
-  border-radius: 3px;
+  border-radius: 8px;
   padding: 8px;
 }
 .widget-mpris-title {
   font-weight: bold;
-  color: @red;
+  color: @lavender;
 }
 .widget-mpris-subtitle {
   color: @subtext0;
@@ -374,9 +373,9 @@ scrollbar slider {
   background: @surface0;
   color: @text;
   border: 1px solid @surface1;
-  border-radius: 3px;
+  border-radius: 8px;
 }
 .widget-mpris > box > button:hover {
   background: @surface1;
-  color: @red;
+  color: @lavender;
 }

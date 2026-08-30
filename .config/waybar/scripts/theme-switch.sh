@@ -26,6 +26,7 @@ cp "$HOME/.config/swaync/themes/${theme}.css"         "$HOME/.config/swaync/styl
 ln -sf "$HOME/.config/hypr/themes/${theme}.lua"  "$HOME/.config/hypr/theme.lua"
 ln -sf "$HOME/.config/hypr/themes/hyprlock-${theme}.conf" "$HOME/.config/hypr/hyprlock.conf"
 printf '%s' "$wall_dir" > "$HOME/.config/rofi/.wall_dir"
+printf '%s' "${theme}" > "$HOME/.config/nvim/.theme"
 
 # Wallpaper random dalla cartella del tema
 wall=$(find "$wall_dir" -maxdepth 1 -type f \
