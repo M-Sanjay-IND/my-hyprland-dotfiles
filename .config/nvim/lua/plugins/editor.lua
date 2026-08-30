@@ -18,22 +18,10 @@ return {
     },
     cmd = "Neotree",
     keys = {
-      { "<C-b>", "<cmd>Neotree toggle<cr>", desc = "Toggle Directory Sidebar" },
-      { "<F2>", "<cmd>Neotree toggle<cr>", desc = "Toggle Directory Sidebar" },
-      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Explorer (sidebar)" },
+      { "<C-b>", "<cmd>Neotree toggle left<cr>", desc = "Toggle Directory Sidebar" },
+      { "<F2>", "<cmd>Neotree toggle left<cr>", desc = "Toggle Directory Sidebar" },
+      { "<leader>e", "<cmd>Neotree toggle left<cr>", desc = "Explorer (sidebar)" },
     },
-    init = function()
-      -- Auto open neo-tree if opened with a directory
-      vim.api.nvim_create_autocmd("BufEnter", {
-        group = vim.api.nvim_create_augroup("NeoTreeInit", { clear = true }),
-        callback = function()
-          local stats = vim.uv.fs_stat(vim.api.nvim_buf_get_name(0))
-          if stats and stats.type == "directory" then
-            require("neo-tree.setup.netrw").hijack()
-          end
-        end,
-      })
-    end,
     opts = {
       close_if_last_window = false,
       popup_border_style = "rounded",
@@ -53,7 +41,6 @@ return {
         bind_to_cwd = true,
         follow_current_file = { enabled = true, leave_dirs_open = true },
         use_libuv_file_watcher = true,
-        hijack_netrw_behavior = "open_default",
         filtered_items = {
           visible = true,
           hide_dotfiles = false,
@@ -62,7 +49,7 @@ return {
       },
       window = {
         position = "left",
-        width = 32,
+        width = 30,
         mappings = {
           ["<space>"] = "none",
           ["<cr>"] = "open",

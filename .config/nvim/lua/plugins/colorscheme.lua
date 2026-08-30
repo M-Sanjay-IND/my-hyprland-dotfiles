@@ -13,8 +13,6 @@ local function get_active_flavor()
   return "macchiato"
 end
 
-local active_flavor = get_active_flavor()
-
 return {
   {
     "catppuccin/nvim",
@@ -26,11 +24,13 @@ return {
 
       return {
         flavour = is_matrix and "mocha" or "macchiato",
-        transparent_background = true,
+        transparent_background = false,
         show_end_of_buffer = false,
         term_colors = true,
         dim_inactive = {
-          enabled = false,
+          enabled = true,
+          shade = "dark",
+          percentage = 0.15,
         },
         integrations = {
           aerial = true,
@@ -61,12 +61,12 @@ return {
         },
         color_overrides = is_matrix and {
           mocha = {
-            base = "#080000",
-            mantle = "#050000",
+            base = "#0a0202",
+            mantle = "#060101",
             crust = "#020000",
-            surface0 = "#160404",
-            surface1 = "#1e0606",
-            surface2 = "#280808",
+            surface0 = "#180404",
+            surface1 = "#240606",
+            surface2 = "#320808",
             text = "#ff5566",
             subtext0 = "#cc3344",
             subtext1 = "#dd4455",
@@ -90,22 +90,22 @@ return {
         custom_highlights = function(colors)
           if is_matrix then
             return {
-              Normal = { bg = "none", fg = "#ff5566" },
-              NormalFloat = { bg = "#0c0202", fg = "#ff5566" },
-              FloatBorder = { bg = "none", fg = "#ff3344" },
-              FloatTitle = { bg = "none", fg = "#ffdd44", bold = true },
-              NormalNC = { bg = "none" },
-              SignColumn = { bg = "none" },
+              Normal = { bg = "#0a0202", fg = "#ff5566" },
+              NormalFloat = { bg = "#100303", fg = "#ff5566" },
+              FloatBorder = { bg = "#100303", fg = "#ff3344" },
+              FloatTitle = { bg = "#100303", fg = "#ffdd44", bold = true },
+              NormalNC = { bg = "#060101" },
+              SignColumn = { bg = "#0a0202" },
               LineNr = { fg = "#6b2030" },
               CursorLineNr = { fg = "#ff3344", bold = true },
-              CursorLine = { bg = "#140303" },
+              CursorLine = { bg = "#180404" },
               Search = { bg = "#ff3344", fg = "#000000", bold = true },
               IncSearch = { bg = "#ffdd44", fg = "#000000", bold = true },
               StatusLine = { bg = "#100202", fg = "#ff5566" },
-              StatusLineNC = { bg = "#080000", fg = "#6b2030" },
-              NeoTreeNormal = { bg = "none" },
-              NeoTreeNormalNC = { bg = "none" },
-              SnacksDashboardNormal = { bg = "none" },
+              StatusLineNC = { bg = "#060101", fg = "#6b2030" },
+              NeoTreeNormal = { bg = "#060101", fg = "#ff5566" },
+              NeoTreeNormalNC = { bg = "#040000" },
+              NeoTreeEndOfBuffer = { fg = "#060101" },
               Directory = { fg = "#ff8040", bold = true },
               DiagnosticError = { fg = "#ff3344" },
               DiagnosticWarn = { fg = "#ff8040" },
@@ -114,12 +114,12 @@ return {
             }
           else
             return {
-              Normal = { bg = "none", fg = colors.text },
-              NormalFloat = { bg = "#1e2030", fg = colors.text },
-              FloatBorder = { bg = "none", fg = colors.lavender },
-              FloatTitle = { bg = "none", fg = colors.mauve, bold = true },
-              NormalNC = { bg = "none" },
-              SignColumn = { bg = "none" },
+              Normal = { bg = colors.base, fg = colors.text },
+              NormalFloat = { bg = colors.mantle, fg = colors.text },
+              FloatBorder = { bg = colors.mantle, fg = colors.lavender },
+              FloatTitle = { bg = colors.mantle, fg = colors.mauve, bold = true },
+              NormalNC = { bg = colors.mantle },
+              SignColumn = { bg = colors.base },
               LineNr = { fg = colors.surface2 },
               CursorLineNr = { fg = colors.mauve, bold = true },
               CursorLine = { bg = "#2e324a" },
@@ -127,9 +127,9 @@ return {
               IncSearch = { bg = colors.peach, fg = colors.base, bold = true },
               StatusLine = { bg = colors.mantle, fg = colors.text },
               StatusLineNC = { bg = colors.crust, fg = colors.overlay0 },
-              NeoTreeNormal = { bg = "none" },
-              NeoTreeNormalNC = { bg = "none" },
-              SnacksDashboardNormal = { bg = "none" },
+              NeoTreeNormal = { bg = colors.mantle, fg = colors.text },
+              NeoTreeNormalNC = { bg = colors.crust },
+              NeoTreeEndOfBuffer = { fg = colors.mantle },
               Directory = { fg = colors.lavender, bold = true },
               DiagnosticError = { fg = colors.red },
               DiagnosticWarn = { fg = colors.peach },

@@ -1,1 +1,1 @@
-/home/sanjaym/.config/hypr/themes/matrix.lua
+/home/sanjaym/.config/hypr/themes/macchiato.lua
