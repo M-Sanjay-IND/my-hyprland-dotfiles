@@ -36,20 +36,27 @@ return {
     },
   },
 
-  -- ── 2. Clean, macOS-Style Lualine Statusline ──────────────────────────────
+  -- ── 2. Clean, macOS Bubble-Style Lualine Statusline ───────────────────────
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
       local is_matrix = (get_flavor() == "matrix")
 
       opts.options = opts.options or {}
-      opts.options.theme = "auto"
+      opts.options.theme = is_matrix and "powerline_dark" or "catppuccin"
       opts.options.component_separators = { left = "│", right = "│" }
-      opts.options.section_separators = { left = "", right = "" }
+      opts.options.section_separators = { left = "", right = "" }
       opts.options.globalstatus = true
 
-      -- Left: Directory badge & file status
+      -- Left: Mode, Branch, Directory & Filename
       opts.sections = opts.sections or {}
+      opts.sections.lualine_a = {
+        { "mode", separator = { left = "", right = "" }, padding = { left = 1, right = 1 } },
+      }
+      opts.sections.lualine_b = {
+        { "branch", icon = "󰊢" },
+        { "diff", symbols = { added = " ", modified = " ", removed = " " } },
+      }
       opts.sections.lualine_c = {
         {
           function()
@@ -68,7 +75,7 @@ return {
             unnamed = "[No Name]",
             newfile = " 󰝒 (new)",
           },
-          color = { fg = is_matrix and "#ff5566" or "#cad3f5" },
+          color = { fg = is_matrix and "#ff5566" or "#cad3f5", gui = "bold" },
         },
         {
           "diagnostics",
@@ -81,28 +88,30 @@ return {
         },
       }
 
-      -- Right: Copilot status & location
-      opts.sections.lualine_x = opts.sections.lualine_x or {}
-      table.insert(opts.sections.lualine_x, 1, {
-        function()
-          local ok, client = pcall(require, "copilot.client")
-          if not ok or client.is_disabled() then
-            return " Copilot: Off"
-          end
-          return " Copilot: On"
-        end,
-        color = function()
-          local ok, client = pcall(require, "copilot.client")
-          if not ok or client.is_disabled() then
-            return { fg = is_matrix and "#6b2030" or "#6e738d" }
-          end
-          return { fg = is_matrix and "#ff3344" or "#a6da95", gui = "bold" }
-        end,
-      })
+      -- Right: Copilot status & filetype
+      opts.sections.lualine_x = {
+        {
+          function()
+            local ok, client = pcall(require, "copilot.client")
+            if not ok or client.is_disabled() then
+              return " Copilot: Off"
+            end
+            return " Copilot: On"
+          end,
+          color = function()
+            local ok, client = pcall(require, "copilot.client")
+            if not ok or client.is_disabled() then
+              return { fg = is_matrix and "#6b2030" or "#6e738d" }
+            end
+            return { fg = is_matrix and "#ff3344" or "#a6da95", gui = "bold" }
+          end,
+        },
+        { "filetype", icon_only = true },
+      }
 
       -- Location pill in lualine_z
       opts.sections.lualine_z = {
-        { "location", padding = { left = 1, right = 1 } },
+        { "location", separator = { left = "", right = "" }, padding = { left = 1, right = 1 } },
       }
 
       return opts
@@ -116,7 +125,8 @@ return {
     opts = {
       options = {
         mode = "buffers",
-        separator_style = "thin",
+        style_preset = "default",
+        separator_style = "slant",
         show_buffer_close_icons = true,
         show_close_icon = false,
         diagnostics = "nvim_lsp",
