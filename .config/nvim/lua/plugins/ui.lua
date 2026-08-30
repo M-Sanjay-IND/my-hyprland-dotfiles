@@ -1,18 +1,5 @@
 -- Modern Aesthetic UI & Dynamic Flavor Statusline
 
-local function get_flavor()
-  local home = os.getenv("HOME") or ""
-  local f = io.open(home .. "/.config/nvim/.theme", "r")
-  if f then
-    local content = f:read("*all"):gsub("%s+", "")
-    f:close()
-    if content == "matrix" then
-      return "matrix"
-    end
-  end
-  return "macchiato"
-end
-
 return {
   -- ── 1. Custom Dashboard Header (Aesthetic Minimalist) ─────────────────────
   {
@@ -36,26 +23,21 @@ return {
     },
   },
 
-  -- ── 2. Clean, macOS Bubble-Style Lualine Statusline ───────────────────────
+  -- ── 2. Clean, macOS-Style Lualine Statusline ──────────────────────────────
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
-      local is_matrix = (get_flavor() == "matrix")
-
       opts.options = opts.options or {}
-      opts.options.theme = is_matrix and "powerline_dark" or "catppuccin"
+      opts.options.theme = "auto"
       opts.options.component_separators = { left = "│", right = "│" }
-      opts.options.section_separators = { left = "", right = "" }
+      opts.options.section_separators = { left = "", right = "" }
       opts.options.globalstatus = true
 
-      -- Left: Mode, Branch, Directory & Filename
       opts.sections = opts.sections or {}
-      opts.sections.lualine_a = {
-        { "mode", separator = { left = "", right = "" }, padding = { left = 1, right = 1 } },
-      }
+      opts.sections.lualine_a = { { "mode", icon = "" } }
       opts.sections.lualine_b = {
         { "branch", icon = "󰊢" },
-        { "diff", symbols = { added = " ", modified = " ", removed = " " } },
+        { "diff", symbols = { added = "✚ ", modified = " ", removed = "✖ " } },
       }
       opts.sections.lualine_c = {
         {
@@ -63,19 +45,18 @@ return {
             local dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
             return "📁 " .. dir
           end,
-          color = { fg = is_matrix and "#ff8040" or "#8bd5ca", gui = "bold" },
+          gui = "bold",
         },
         {
           "filename",
           file_status = true,
-          path = 1, -- relative path
+          path = 1,
           symbols = {
             modified = " 󰏫 (unsaved)",
             readonly = " 󰌾 (readonly)",
             unnamed = "[No Name]",
             newfile = " 󰝒 (new)",
           },
-          color = { fg = is_matrix and "#ff5566" or "#cad3f5", gui = "bold" },
         },
         {
           "diagnostics",
@@ -88,31 +69,28 @@ return {
         },
       }
 
-      -- Right: Copilot status & filetype
       opts.sections.lualine_x = {
         {
           function()
             local ok, client = pcall(require, "copilot.client")
-            if not ok or client.is_disabled() then
-              return " Copilot: Off"
+            if ok and client and type(client.is_disabled) == "function" and not client.is_disabled() then
+              return " Copilot: On"
             end
-            return " Copilot: On"
+            return " Copilot: Off"
           end,
           color = function()
             local ok, client = pcall(require, "copilot.client")
-            if not ok or client.is_disabled() then
-              return { fg = is_matrix and "#6b2030" or "#6e738d" }
+            if ok and client and type(client.is_disabled) == "function" and not client.is_disabled() then
+              return { fg = "#a6da95", gui = "bold" }
             end
-            return { fg = is_matrix and "#ff3344" or "#a6da95", gui = "bold" }
+            return { fg = "#6e738d" }
           end,
         },
         { "filetype", icon_only = true },
       }
 
-      -- Location pill in lualine_z
-      opts.sections.lualine_z = {
-        { "location", separator = { left = "", right = "" }, padding = { left = 1, right = 1 } },
-      }
+      opts.sections.lualine_y = { "progress" }
+      opts.sections.lualine_z = { { "location", padding = { left = 1, right = 1 } } }
 
       return opts
     end,
@@ -126,7 +104,7 @@ return {
       options = {
         mode = "buffers",
         style_preset = "default",
-        separator_style = "slant",
+        separator_style = "thin",
         show_buffer_close_icons = true,
         show_close_icon = false,
         diagnostics = "nvim_lsp",
