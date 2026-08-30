@@ -1,8 +1,3 @@
-// ═══════════════════════════════════════════════════════════════════════
-// Waybar config — redesign 2026-04-28
-// Spec: ~/docs/superpowers/specs/2026-04-27-waybar-redesign-design.md
-// Plan: ~/docs/superpowers/plans/2026-04-28-waybar-redesign-plan.md
-// ═══════════════════════════════════════════════════════════════════════
 {
   "layer": "top",
   "position": "top",
@@ -10,41 +5,40 @@
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "height": 0,
-  "spacing": 3,
+  "height": 38,
+  "spacing": 6,
   "fixed-center": true,
   "ipc": true,
-  "margin-top": 3,
-  "margin-left": 8,
-  "margin-right": 8,
+  "margin-top": 6,
+  "margin-left": 14,
+  "margin-right": 14,
 
+  // ─── TOP BAR LAYOUT (macOS Floating Island Style) ─────────────────────────
   "modules-left": [
-    "group/system",
+    "custom/launcher",
+    "hyprland/workspaces",
     "hyprland/window"
   ],
 
   "modules-center": [
-    "group/notify",
-    "hyprland/workspaces",
-    "custom/idle-inhibitor"
+    "clock",
+    "custom/weather"
   ],
 
   "modules-right": [
-    "custom/active-ip",
-    "tray",
-    "privacy",
+    "group/hardware",
+    "group/control",
     "battery",
-    "custom/weather",
-    "clock"
+    "custom/idle-inhibitor",
+    "custom/control-center",
+    "custom/power"
   ],
 
-  // ─── CORE ─────────────────────────────────────────────────────────────
-  "hyprland/window": {
-    "format": "{}",
-    "icon": true,
-    "icon-size": 14,
-    "max-length": 60,
-    "separate-outputs": true
+  // ─── LEFT MODULES ────────────────────────────────────────────────────────
+  "custom/launcher": {
+    "format": "󰣇",
+    "tooltip-format": "App Launcher (SUPER + Space)",
+    "on-click": "~/.local/bin/rofi-launcher -show drun"
   },
 
   "hyprland/workspaces": {
@@ -59,92 +53,39 @@
     "format-window-separator": " ",
     "window-rewrite-default": "",
     "window-rewrite": {
-      "title<.*amazon.*>":   "🛒",
-      "title<.*reddit.*>":   "👽",
-
-      "class<firefox|org.mozilla.firefox|librewolf|floorp|mercury-browser|[Cc]achy-browser>": "󰈹",
+      "class<firefox|org.mozilla.firefox|librewolf|floorp|cachy-browser>": "󰈹",
       "class<zen>":                        "󰰷",
-      "class<waterfox|waterfox-bin>":      "󰈹",
-      "class<microsoft-edge>":             "󰇩",
-      "class<Chromium|Thorium|[Cc]hrome>": "󰊯",
-      "class<brave-browser>":              "🦁",
-      "class<tor browser>":                "🧅",
-      "class<firefox-developer-edition>":  "🦊",
-
-      "class<kitty|konsole|[Aa]lacritty>": "󰄛",
-      "class<com.mitchellh.ghostty>":      "󰄛",
-      "class<org.wezfurlong.wezterm>":     "󰄛",
-
-      "class<[Tt]hunderbird|[Tt]hunderbird-esr>": "󰇮",
-      "title<.*gmail.*>":                  "󰊫",
-
-      "class<[Tt]elegram-desktop|org.telegram.desktop>": "󰔁",
-      "class<discord|discord-canary|[Ww]ebcord|[Vv]esktop|com.discordapp.Discord|dev.vencord.Vesktop>": "󰙯",
-      "class<[Ss]ignal|signal-desktop|org.signal.Signal>": "󰍩",
-      "title<.*whatsapp.*>":               "󰖣",
-      "title<.*messenger.*>":              "󰈤",
-      "title<.*Discord.*>":                "󰙯",
-
-      "title<.*ChatGPT.*>":    "󰚩",
-      "title<.*deepseek.*>":   "󰚩",
-      "class<subl>":           "󰅳",
-      "class<slack>":          "󰒱",
-
-      "class<mpv>":            "󰕧",
-      "class<celluloid>":      "󰕧",
-      "title<.*youtube.*>":    "󰗃",
-      "class<vlc>":            "󰕼",
-      "class<[Kk]denlive|org.kde.kdenlive>": "🎬",
-      "title<.*cmus.*>":       "󰎵",
-      "class<[Ss]potify>":     "󰓇",
-
-      "class<virt-manager>":   "󰍹",
-      "class<virtualbox manager>": "💽",
-      "class<remmina|org.remmina.Remmina>": "🖥️",
-
-      "class<VSCode|code|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>": "󰨞",
-      "class<dev.zed.Zed>":    "󰵁",
-      "title<.*github.*>":     "󰊤",
-      "class<libreoffice-writer>":      "󰈙",
-      "class<libreoffice-startcenter>": "󰏆",
-      "class<libreoffice-calc>":        "󱓟",
-      "title<.*nvim ~.*>":     "󱃕",
-      "title<.*nvim.*>":       "󱃕",
-      "title<.*vim.*>":        "󱃕",
-      "title<.*figma.*>":      "󰔦",
-      "class<jetbrains-idea>": "󱅟",
-
-      "class<obs|com.obsproject.Studio>":  "󰑋",
-      "class<[Pp]avucontrol|org.pulseaudio.pavucontrol>": "󱡫",
-      "class<steam>":          "󰓓",
-      "class<thunar|nemo>":    "󰝰",
-      "class<dolphin>":        "󰉋",
-      "class<obsidian>":       "󰎕",
-      "class<Gparted>":        "󰋊",
-      "class<gimp>":           "󰏺",
-      "class<nwg-look>":       "󰔎"
+      "class<Chromium|Thorium|chrome>":    "󰊯",
+      "class<kitty|konsole|alacritty>":    "󰄛",
+      "class<VSCode|code|VSCodium>":       "󰨞",
+      "class<subl>":                       "󰅳",
+      "class<obsidian>":                   "󰎕",
+      "class<spotify>":                    "󰓇",
+      "class<discord|vesktop|webcord>":    "󰙯",
+      "class<thunar|dolphin|nemo>":        "󰉋",
+      "class<steam>":                      "󰓓",
+      "class<mpv|vlc>":                    "󰕼",
+      "class<gimp>":                       "󰏺"
     },
     "persistent-workspaces": { "*": 1 }
   },
 
-  "custom/control-center": {
-    "format": "󰂚 {}",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "return-type": "json",
-    "tooltip-format": "Notifications: {}\nLeft-click: Open · Right-click: Toggle DND",
-    "escape": true
+  "hyprland/window": {
+    "format": "{}",
+    "icon": true,
+    "icon-size": 15,
+    "max-length": 45,
+    "separate-outputs": true,
+    "rewrite": {
+      "": "Desktop"
+    }
   },
 
-  "tray": {
-    "icon-size": 16,
-    "spacing": 8
-  },
-
+  // ─── CENTER MODULES ──────────────────────────────────────────────────────
   "clock": {
-    "format": "{:%b%e %H:%M}",
-    "interval": 60,
+    "format": "󰃭 {:%a %b %e   󰥔 %I:%M %p}",
+    "format-alt": "󰃭 {:%Y-%m-%d   󰥔 %H:%M:%S}",
+    "interval": 1,
     "tooltip-format": "<tt>{calendar}</tt>",
     "calendar": {
       "mode": "month",
@@ -160,27 +101,35 @@
     }
   },
 
-  // ─── SYSTEM ───────────────────────────────────────────────────────────
-  "group/system": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 500,
-      "children-class": "custom-temp",
-      "transition-left-to-right": false
-    },
-    "modules": ["custom/temp", "cpu", "memory"]
+  "custom/weather": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/weather.sh",
+    "interval": 1800,
+    "return-type": "json",
+    "tooltip": true,
+    "hide-empty-text": true
+  },
+
+  // ─── RIGHT MODULES ───────────────────────────────────────────────────────
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": [
+      "cpu",
+      "memory",
+      "custom/temp"
+    ]
   },
 
   "cpu": {
-    "interval": 5,
-    "format": "󰍛 {usage}%",
-    "tooltip": false
+    "interval": 2,
+    "format": " {usage}%",
+    "tooltip": true
   },
 
   "memory": {
-    "interval": 10,
-    "format": "󰾆 {used:0.1f}G",
-    "tooltip-format": "{used:0.1f}G / {total:0.1f}G ({percentage}%)"
+    "interval": 5,
+    "format": "󰍛 {used:0.1f}G",
+    "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)"
   },
 
   "custom/temp": {
@@ -191,74 +140,73 @@
     "tooltip": true
   },
 
-  // ─── NOTIFY + THEME ──────────────────────────────────────────────────
-  "group/notify": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 500,
-      "children-class": "theme-btn",
-      "transition-left-to-right": false
+  "group/control": {
+    "orientation": "horizontal",
+    "modules": [
+      "network",
+      "bluetooth",
+      "pulseaudio",
+      "backlight"
+    ]
+  },
+
+  "network": {
+    "format-wifi": "󰤨 {essid}",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-linked": "󰈀 {ifname} (No IP)",
+    "format-disconnected": "󰤭 Disconnected",
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr} (Signal: {signalStrength}%)",
+    "on-click": "kitty --class floating-tool -e nmtui"
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱 {device_alias}",
+    "format-disabled": "󰂲",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "on-click": "sh -c 'command -v bluetuith >/dev/null && kitty --class floating-tool -e bluetuith || kitty --class floating-tool -e bluetoothctl'"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "󰂰 {volume}%",
+    "format-muted": "󰝟 Muted",
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "󰏲",
+      "portable": "󰏲",
+      "car": "󰄋",
+      "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "modules": ["custom/control-center", "custom/theme-macchiato", "custom/theme-hacker"]
+    "scroll-step": 2,
+    "on-click": "pamixer -t",
+    "on-click-right": "pavucontrol",
+    "tooltip-format": "Volume: {volume}%"
   },
 
-  "custom/theme-macchiato": {
-    "format": "👻",
-    "tooltip-format": "Whitehat theme",
-    "on-click": "~/.config/waybar/scripts/theme-switch.sh macchiato"
-  },
-
-  "custom/theme-hacker": {
-    "format": "💀",
-    "tooltip-format": "Blackhat Theme",
-    "on-click": "~/.config/waybar/scripts/theme-switch.sh matrix"
-  },
-
-  // ─── POWER ────────────────────────────────────────────────────────────
   "backlight": {
     "device": "amdgpu_bl2",
     "format": "{icon} {percent}%",
-    "format-icons": ["", "", "", "", ""],
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
     "on-scroll-up": "brightnessctl set +5%",
     "on-scroll-down": "brightnessctl set 5%-",
     "tooltip-format": "Brightness: {percent}%"
   },
 
   "battery": {
-    "states": { "good": 95, "warning": 30, "critical": 20 },
+    "states": {
+      "good": 90,
+      "warning": 30,
+      "critical": 15
+    },
     "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": " {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
     "format-alt": "{time} {icon}",
     "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip-format": "{capacity}% ({timeTo})"
-  },
-
-  // ─── STATUS (visibili solo se rilevanti) ──────────────────────────────
-  "privacy": {
-    "icon-size": 14,
-    "transition-duration": 250,
-    "modules": [
-      { "type": "screenshare", "tooltip": true, "tooltip-icon-size": 24 },
-      { "type": "audio-in",   "tooltip": true },
-      { "type": "audio-out",  "tooltip": false }
-    ]
-  },
-
-  "custom/vpn": {
-    "format": "{}",
-    "exec": "~/.config/waybar/scripts/vpn-status.sh",
-    "interval": 10,
-    "tooltip": false,
-    "hide-empty-text": true
-  },
-
-  "custom/active-ip": {
-    "exec": "~/.config/waybar/scripts/active-ip.sh",
-    "interval": 10,
-    "format": "{}",
-    "tooltip": false,
-    "hide-empty-text": true
+    "tooltip-format": "{capacity}% ({timeTo})\nPower: {power:0.1f}W"
   },
 
   "custom/idle-inhibitor": {
@@ -267,15 +215,22 @@
     "on-click": "~/.config/waybar/scripts/idle-toggle.sh",
     "signal": 8,
     "tooltip": true,
-    "tooltip-format": "Idle Inhibitor — ☕ Active (Screen stays awake) · 󰒲 Inactive (Normal sleep/lock)"
+    "tooltip-format": "Idle Inhibitor: Click to toggle keep-awake"
   },
 
-  "custom/weather": {
-    "format": "{}",
-    "exec": "~/.config/waybar/scripts/weather.sh",
-    "interval": 1800,
+  "custom/control-center": {
+    "format": "󰂚",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
     "return-type": "json",
-    "tooltip": true,
-    "hide-empty-text": true
+    "tooltip-format": "Notifications · Left-click: Open · Right-click: Toggle DND",
+    "escape": true
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "tooltip-format": "Power Menu (SUPER + Escape)",
+    "on-click": "wlogout -p layer-shell -C ~/.config/wlogout/style.css -l ~/.config/wlogout/layout -b 5"
   }
 }

@@ -1,55 +1,75 @@
 /* ─────────────────────────────────────────────────────────
-   Base — reset, font, common pill rules
+   Base — macOS Floating Island & Glassmorphism Aesthetics
    ───────────────────────────────────────────────────────── */
 
 * {
   border: none;
   border-radius: 0;
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-weight: bold;
-  font-size: 13px;
+  font-family: "JetBrainsMono Nerd Font", "SF Pro Display", sans-serif;
+  font-weight: 700;
+  font-size: 12.5px;
   min-height: 0;
-  transition: background 200ms ease, color 200ms ease, opacity 200ms ease;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 window#waybar {
   background: @bar-bg;
   color: @text-fg;
+  border-radius: 16px;
+  border: 1px solid alpha(@text-fg, 0.10);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.40);
+  padding: 0 6px;
 }
 
-/* Common pill style */
+/* Common macOS Frosted Pill Style */
+#custom-launcher,
+#workspaces,
 #window,
-#tray,
 #clock,
-#cpu,
-#memory,
-#bluetooth,
-#network,
-#backlight,
-#battery,
-#idle_inhibitor,
-#custom-temp,
-#custom-vpn,
-#custom-active-ip,
 #custom-weather,
-#privacy {
+#group-hardware,
+#group-control,
+#battery,
+#custom-idle-inhibitor,
+#custom-control-center,
+#custom-power {
   background: @pill-bg;
   color: @text-fg;
-  padding: 2px 10px;
-  margin: 4px 0;
-  border-radius: 8px;
+  border: 1px solid alpha(@text-fg, 0.08);
+  border-radius: 12px;
+  padding: 3px 11px;
+  margin: 3px 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-#workspaces {
-  background: @pill-bg;
-  margin: 4px 0;
-  padding: 2px 6px;
-  border-radius: 8px;
+#custom-launcher:hover,
+#workspaces:hover,
+#window:hover,
+#clock:hover,
+#custom-weather:hover,
+#group-hardware:hover,
+#group-control:hover,
+#battery:hover,
+#custom-idle-inhibitor:hover,
+#custom-control-center:hover,
+#custom-power:hover {
+  background: @pill-bg-hover;
+  border-color: alpha(@accent-hover, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
+/* Tooltip macOS Glass Style */
 tooltip {
-  background: @mantle;
-  border: 1px solid @surface0;
-  border-radius: 8px;
+  background: alpha(@mantle, 0.95);
+  border: 1px solid alpha(@text-fg, 0.15);
+  border-radius: 12px;
+  padding: 8px 12px;
   color: @text;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+tooltip label {
+  font-size: 12px;
+  font-weight: 500;
+  color: @text-fg;
 }

@@ -1,33 +1,20 @@
 /* ─────────────────────────────────────────────────────────
-   System — cpu + memory + temp pill
+   System — Clock & Weather (macOS Dynamic Island)
    ───────────────────────────────────────────────────────── */
 
-#system {
-  background: @pill-bg;
-  border-radius: 8px;
-  padding: 0 4px;
-  margin: 4px 2px;
-}
-#cpu,
-#memory,
-#custom-temp {
-  background: transparent;
-  margin: 0;
-  padding: 2px 6px;
-  border-radius: 0;
+#clock {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: @text-fg;
+  padding: 3px 14px;
+  letter-spacing: 0.3px;
 }
 
-#cpu          { color: @lavender; }
-#memory       { color: @teal; }
-#custom-temp  { color: @green; }
-
-#custom-temp.warm     { color: @yellow; }
-#custom-temp.hot      { color: @peach; }
-#custom-temp.critical {
-  color: @base;
-  background: @accent-critical;
-  border-radius: 4px;
-  padding: 2px 8px;
+#clock:hover {
+  color: @accent-hover;
 }
 
-#system:hover { background: @pill-bg-hover; }
+#custom-weather {
+  color: @accent-info;
+  padding: 3px 10px;
+}

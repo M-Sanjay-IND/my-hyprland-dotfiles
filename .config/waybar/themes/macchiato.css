@@ -1,7 +1,5 @@
 /* ─────────────────────────────────────────────────────────
-   Theme — Catppuccin Macchiato
-   Palette completa + role mapping per la waybar.
-   Per cambiare tema: ln -sf themes/X.css theme.css + killall -SIGUSR2 waybar
+   Theme — Catppuccin Macchiato (Frosted Glass Aesthetics)
    ───────────────────────────────────────────────────────── */
 
 /* ── Palette ── */
@@ -32,13 +30,13 @@
 @define-color blue       #8aadf4;
 @define-color lavender   #b7bdf8;
 
-/* ── Role mapping ── */
-@define-color bar-bg          alpha(@base, 0.00);
-@define-color pill-bg         @surface0;
-@define-color pill-bg-hover   @surface1;
+/* ── Role mapping for Modern Classic Glassmorphism ── */
+@define-color bar-bg          rgba(30, 32, 48, 0.78);
+@define-color pill-bg         rgba(54, 58, 79, 0.55);
+@define-color pill-bg-hover   rgba(73, 77, 100, 0.80);
 @define-color text-fg         @text;
-@define-color text-dim        @overlay0;
-@define-color accent-active   @green;
+@define-color text-dim        @overlay1;
+@define-color accent-active   @mauve;
 @define-color accent-hover    @lavender;
 @define-color accent-warning  @peach;
 @define-color accent-critical @red;

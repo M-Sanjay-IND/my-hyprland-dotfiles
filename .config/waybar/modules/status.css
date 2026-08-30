@@ -1,39 +1,112 @@
 /* ─────────────────────────────────────────────────────────
-   Status — privacy, vpn, idle-inhibitor, weather
+   Status — Hardware, Controls & Battery
    ───────────────────────────────────────────────────────── */
 
-#privacy {
-  background: alpha(@accent-critical, 0.45);
-  color: @accent-critical;
-  border-radius: 8px;
-  padding: 2px 8px;
+#group-hardware,
+#group-control {
+  padding: 2px 4px;
 }
-#privacy item.audio-in    { color: @accent-critical; }
-#privacy item.screenshare { color: @accent-warning; }
-#privacy item.audio-out   { color: @accent-good; }
 
-#custom-vpn {
+#cpu,
+#memory,
+#custom-temp,
+#network,
+#bluetooth,
+#pulseaudio,
+#backlight {
+  padding: 2px 7px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+#cpu {
+  color: @accent-active;
+}
+
+#memory {
+  color: @accent-info;
+}
+
+#custom-temp {
+  color: @accent-warning;
+}
+
+#network {
+  color: @accent-good;
+}
+
+#bluetooth {
+  color: @accent-hover;
+}
+
+#pulseaudio {
+  color: @accent-active;
+}
+
+#pulseaudio.muted {
+  color: @text-dim;
+}
+
+#backlight {
+  color: @accent-warning;
+}
+
+#battery {
+  color: @accent-good;
+  padding: 3px 10px;
+}
+
+#battery.charging,
+#battery.plugged {
   color: @accent-good;
   background: alpha(@accent-good, 0.15);
-  min-width: 0;
 }
 
-#idle_inhibitor {
-  color: @text-dim;
-  /* background: @pill-bg ereditato da _base.css */
-  padding: 2px 6px;
-  opacity: 0.55;
-}
-#idle_inhibitor.activated {
-  background: alpha(@accent-warning, 0.25);
+#battery.warning:not(.charging) {
   color: @accent-warning;
-  opacity: 1;
+  background: alpha(@accent-warning, 0.15);
 }
 
-#custom-weather { color: @sky; min-width: 0; }
+#battery.critical:not(.charging) {
+  color: @accent-critical;
+  background: alpha(@accent-critical, 0.25);
+  animation: blink 0.8s infinite alternate;
+}
 
-#custom-active-ip {
+@keyframes blink {
+  to {
+    background: transparent;
+    color: @accent-critical;
+  }
+}
+
+#custom-idle-inhibitor {
+  font-size: 14px;
+  padding: 2px 9px;
+  color: @accent-warning;
+}
+
+#custom-control-center {
+  font-size: 14px;
+  padding: 2px 10px;
+  color: @accent-hover;
+}
+
+#custom-control-center:hover {
   color: @accent-active;
-  font-weight: bold;
-  min-width: 0;
+  background: alpha(@accent-hover, 0.15);
+}
+
+#custom-power {
+  font-size: 14px;
+  padding: 2px 11px;
+  color: @accent-critical;
+  margin-right: 2px;
+}
+
+#custom-power:hover {
+  color: @base;
+  background: @accent-critical;
 }
