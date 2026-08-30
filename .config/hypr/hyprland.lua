@@ -34,9 +34,6 @@ hl.env("HYPRCURSOR_SIZE",   "24")
 -- Firefox
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 
--- Primary GPU: AMD Radeon 890M (Ultra-efficient 1.5W iGPU), Fallback: Nvidia RTX 5070 Ti
-hl.env("AQ_DRM_DEVICES",               "/dev/dri/by-path/pci-0000:65:00.0-card:/dev/dri/by-path/pci-0000:64:00.0-card")
-hl.env("WLR_DRM_DEVICES",              "/dev/dri/by-path/pci-0000:65:00.0-card:/dev/dri/by-path/pci-0000:64:00.0-card")
 hl.env("XDG_SESSION_TYPE",             "wayland")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
