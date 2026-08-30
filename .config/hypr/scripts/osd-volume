@@ -7,10 +7,10 @@ mkdir -p "$state_dir"
 
 case "$1" in
   up)
-    pamixer -u -i 5
+    pamixer --allow-boost --set-limit 150 -u -i 5
     ;;
   down)
-    pamixer -u -d 5
+    pamixer --allow-boost --set-limit 150 -u -d 5
     ;;
   mute)
     pamixer -t
