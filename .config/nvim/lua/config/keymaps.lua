@@ -212,3 +212,19 @@ map({ "n", "i", "v" }, "<leader>r", run_current_file, { desc = "Run Current File
 
 vim.api.nvim_create_user_command("Run", run_current_file, { desc = "Run Current File" })
 vim.api.nvim_create_user_command("R", run_current_file, { desc = "Run Current File" })
+
+-- ── 9. Interactive Theme Switcher (Space + u + T or :ThemeToggle) ──────────
+local function toggle_theme()
+  local cur = vim.g.colors_name or ""
+  if cur:find("catppuccin") then
+    vim.cmd("colorscheme cyberdream")
+    vim.notify("🎨 Switched to Matrix / Cyberdream Theme", vim.log.levels.INFO, { title = "Theme" })
+  else
+    vim.cmd("colorscheme catppuccin-macchiato")
+    vim.notify("🌸 Switched to Catppuccin Macchiato Theme", vim.log.levels.INFO, { title = "Theme" })
+  end
+end
+
+map("n", "<leader>uT", toggle_theme, { desc = "Toggle Theme Flavor (Catppuccin / Cyberdream)" })
+vim.api.nvim_create_user_command("ThemeToggle", toggle_theme, { desc = "Toggle Theme Flavor" })
+
