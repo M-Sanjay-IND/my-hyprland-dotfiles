@@ -3,18 +3,36 @@
 local map = vim.keymap.set
 
 -- ── 1. Direct Save (Ctrl+S & Ctrl+Shift+S) ──────────────────────────────────
-map("n", "<C-s>", "<cmd>w<cr>", { desc = "Save File" })
-map("i", "<C-s>", function()
-  vim.cmd("silent! noautocmd write")
-end, { desc = "Save File (Stay in Insert Mode)" })
-map("v", "<C-s>", "<esc><cmd>w<cr>gv", { desc = "Save File" })
-map("x", "<C-s>", "<esc><cmd>w<cr>gv", { desc = "Save File" })
+local function save_current_file()
+  local buf = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(buf)
+  if bufname == "" or vim.bo[buf].buftype == "nofile" then
+    vim.ui.input({ prompt = "Save As: " }, function(input)
+      if input and input ~= "" then
+        vim.cmd("write " .. vim.fn.fnameescape(input))
+        vim.notify("💾 Saved as " .. input, vim.log.levels.INFO, { title = "Neovim" })
+      end
+    end)
+  else
+    local ok, err = pcall(vim.cmd, "write")
+    if ok then
+      local fname = vim.fn.fnamemodify(bufname, ":t")
+      vim.notify("💾 Saved " .. fname, vim.log.levels.INFO, { title = "Neovim" })
+    else
+      vim.notify("❌ Error saving: " .. tostring(err), vim.log.levels.ERROR, { title = "Neovim" })
+    end
+  end
+end
 
-map("n", "<C-S-s>", "<cmd>wa<cr>", { desc = "Save All Files" })
-map("i", "<C-S-s>", function()
-  vim.cmd("silent! noautocmd wa")
-end, { desc = "Save All Files (Stay in Insert Mode)" })
-map("v", "<C-S-s>", "<esc><cmd>wa<cr>gv", { desc = "Save All Files" })
+map({ "n", "i", "v", "x", "s" }, "<C-s>", save_current_file, { desc = "Save File" })
+map({ "n", "i", "v", "x", "s" }, "<C-S-s>", function()
+  local ok, err = pcall(vim.cmd, "wa")
+  if ok then
+    vim.notify("💾 All files saved", vim.log.levels.INFO, { title = "Neovim" })
+  else
+    vim.notify("❌ Error saving all: " .. tostring(err), vim.log.levels.ERROR, { title = "Neovim" })
+  end
+end, { desc = "Save All Files" })
 
 -- ── 2. Integrated Terminal (Ctrl+` or Ctrl+~ or Ctrl+J or F12) ───────────────
 local function toggle_terminal()
