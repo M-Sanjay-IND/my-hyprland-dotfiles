@@ -34,6 +34,10 @@ local colorPicker = "hyprpicker"
 ---- ENVIRONMENT VARIABLES ----
 --------------------------------
 
+-- Force Aquamarine to use ultra-efficient AMD Radeon 890M iGPU (65:00.0) for desktop rendering (~1.5W)
+-- Keeps NVIDIA RTX 5070 Ti (64:00.0) in D3cold (0.0W) sleep until launched with prime-run
+hl.env("AQ_DRM_DEVICES", "/dev/dri/by-path/pci-0000:65:00.0-card:/dev/dri/by-path/pci-0000:64:00.0-card")
+
 hl.env("XCURSOR_SIZE",      "24")
 hl.env("HYPRCURSOR_SIZE",   "24")
 
