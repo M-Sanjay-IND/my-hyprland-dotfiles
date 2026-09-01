@@ -24,15 +24,11 @@ if [ "$CURRENT_STATE" = "off" ]; then
     # Turn off keyboard RGB to save power
     asusctl leds set off 2>/dev/null || true
 
-    # Disable Hyprland animations & blur to save GPU power
-    hyprctl keyword decoration:blur:enabled false 2>/dev/null || true
-    hyprctl keyword animations:enabled false 2>/dev/null || true
-
-    # Drop display refresh rate to 60Hz (saves massive power on OLED/IPS)
-    hyprctl keyword monitor "eDP-1, preferred@60, auto, 1.25" 2>/dev/null || true
+    # Lower brightness to 35% on battery to save ~3 Watts
+    brightnessctl set 35% 2>/dev/null || true
 
     # Send rich notification
-    notify-send -u normal -i "battery-good" "🔋 Ultra Battery Saver" "ENABLED\n• Power Draw Dropped\n• Quiet Profile (Low TDP)\n• 60Hz Display Refresh\n• CPU EPP: Power\n• GPU Blur & RGB OFF"
+    notify-send -u normal -i "battery-good" "🔋 Ultra Battery Saver" "ENABLED\n• Power Draw Minimized\n• Quiet Profile (Low TDP)\n• CPU EPP: Power (Max Efficiency)\n• Screen Brightness: 35%\n• Keyboard RGB: OFF"
 else
     # ── 2. Disable & Restore Normal Mode ──────────────────────────────────────
     echo "off" > "$STATE_FILE"
@@ -49,13 +45,9 @@ else
     # Restore keyboard RGB
     asusctl leds set med 2>/dev/null || true
 
-    # Restore Hyprland animations & blur
-    hyprctl keyword decoration:blur:enabled true 2>/dev/null || true
-    hyprctl keyword animations:enabled true 2>/dev/null || true
-
-    # Restore full high refresh rate
-    hyprctl keyword monitor "eDP-1, preferred, auto, 1.25" 2>/dev/null || true
+    # Restore brightness
+    brightnessctl set 70% 2>/dev/null || true
 
     # Send rich notification
-    notify-send -u normal -i "battery-charging" "⚡ Normal Mode Restored" "• Balanced Profile\n• Full High Refresh Rate (120Hz+)\n• Hyprland Animations & Blur ON\n• Keyboard RGB ON"
+    notify-send -u normal -i "battery-charging" "⚡ Normal Mode Restored" "• Balanced Profile\n• CPU EPP: Balanced\n• Keyboard RGB ON"
 fi

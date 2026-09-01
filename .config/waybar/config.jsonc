@@ -197,17 +197,19 @@
   },
 
   "battery": {
+    "bat": "BAT1",
+    "interval": 2,
     "states": {
       "good": 90,
       "warning": 30,
       "critical": 15
     },
     "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
+    "format-charging": "󰂄 {capacity}% ({power:0.1f}W)",
     "format-plugged": "󰚥 {capacity}%",
-    "format-alt": "{time} {icon}",
+    "format-alt": "{time} {icon} ({power:0.1f}W)",
     "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip-format": "{capacity}% ({timeTo})\nPower: {power:0.1f}W"
+    "tooltip-format": "{capacity}% ({timeTo})\nLive Power: {power:0.1f}W"
   },
 
   "custom/idle-inhibitor": {
