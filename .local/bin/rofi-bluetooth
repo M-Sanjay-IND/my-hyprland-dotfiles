@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# rofi-bluetooth — Fast, aesthetic Bluetooth menu for Waybar & Hyprland
+
+theme_file="$HOME/.config/rofi/config.rasi"
+
+# Check Bluetooth power status
+power_status=$(bluetoothctl show | grep "Powered:" | awk '{print $2}')
+
+if [ "$power_status" != "yes" ]; then
+    chosen=$(printf "󰂯 Turn Bluetooth ON\n󰅖 Cancel" | rofi -dmenu -p "Bluetooth is OFF" -theme "$theme_file")
+    if [ "$chosen" = "󰂯 Turn Bluetooth ON" ]; then
+        bluetoothctl power on
+        notify-send -u low -i "bluetooth" "Bluetooth" "Powered ON"
+    fi
+    exit 0
+fi
+
+# Build list of devices
+options="󰂲 Turn Bluetooth OFF\n󰂰 Scan for Devices (5s)\n────────────────────────"
+
+# Get paired devices
+devices=$(bluetoothctl devices Paired | cut -d ' ' -f 2-)
+
+while read -r mac name; do
+    [ -z "$mac" ] && continue
+    info=$(bluetoothctl info "$mac")
+    is_connected=$(echo "$info" | grep "Connected:" | awk '{print $2}')
+    
+    if [ "$is_connected" = "yes" ]; then
+        options="$options\n󰂱 $name [Connected] ($mac)"
+    else
+        options="$options\n󰂲 $name [Disconnected] ($mac)"
+    fi
+done <<< "$devices"
+
+options="$options\n────────────────────────\n󰚥 Open TUI Manager (Bluetuith)"
+
+chosen=$(echo -e "$options" | rofi -dmenu -p "Bluetooth" -theme "$theme_file")
+
+[ -z "$chosen" ] && exit 0
+
+case "$chosen" in
+    "󰂲 Turn Bluetooth OFF")
+        bluetoothctl power off
+        notify-send -u low -i "bluetooth-disabled" "Bluetooth" "Powered OFF"
+        ;;
+    "󰂰 Scan for Devices (5s)")
+        notify-send -u low -i "bluetooth" "Bluetooth" "Scanning for nearby devices..."
+        bluetoothctl --timeout 5 scan on >/dev/null 2>&1
+        exec "$0"
+        ;;
+    "󰚥 Open TUI Manager (Bluetuith)")
+        kitty --class floating-tool -e bluetuith
+        ;;
+    *\[Connected\]*)
+        mac=$(echo "$chosen" | grep -o -E '([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})')
+        name=$(echo "$chosen" | sed -E 's/^󰂱 (.*) \[Connected\].*/\1/')
+        action=$(printf "󰂲 Disconnect\n󰒭 Reconnect\n󰅖 Cancel" | rofi -dmenu -p "$name" -theme "$theme_file")
+        if [ "$action" = "󰂲 Disconnect" ]; then
+            bluetoothctl disconnect "$mac"
+            notify-send -u low -i "bluetooth" "Bluetooth" "Disconnected from $name"
+        elif [ "$action" = "󰒭 Reconnect" ]; then
+            bluetoothctl disconnect "$mac"
+            sleep 1
+            bluetoothctl connect "$mac"
+            notify-send -u normal -i "audio-headphones" "Bluetooth" "Reconnected to $name"
+        fi
+        ;;
+    *\[Disconnected\]*)
+        mac=$(echo "$chosen" | grep -o -E '([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})')
+        name=$(echo "$chosen" | sed -E 's/^󰂲 (.*) \[Disconnected\].*/\1/')
+        notify-send -u low -i "bluetooth" "Bluetooth" "Connecting to $name..."
+        bluetoothctl trust "$mac" >/dev/null 2>&1
+        out=$(bluetoothctl connect "$mac" 2>&1)
+        if echo "$out" | grep -q "successful"; then
+            notify-send -u normal -i "audio-headphones" "Bluetooth" "Connected to $name"
+            # Auto switch audio sink if headphone
+            sleep 1
+            sink_id=$(wpctl status | grep -B 1 -i "$name" | grep -o -E '[0-9]+' | head -n 1)
+            [ -n "$sink_id" ] && wpctl set-default "$sink_id" 2>/dev/null || true
+        else
+            notify-send -u critical -i "dialog-error" "Bluetooth" "Failed to connect to $name\nMake sure device is nearby and in pairing mode."
+        fi
+        ;;
+esac
