@@ -155,3 +155,8 @@ end)
 -- Custom Ultra Battery Saver Toggle (SUPER + SHIFT + E & SUPER + F6)
 hl.bind(mainMod .. " + SHIFT + e", function() hl.exec_cmd(home .. "/.config/hypr/scripts/battery-saver.sh") end)
 hl.bind(mainMod .. " + F6",        function() hl.exec_cmd(home .. "/.config/hypr/scripts/battery-saver.sh") end)
+
+-- GPU Mode Switcher (Integrated Eco vs Hybrid Gaming) (SUPER + SHIFT + G & SUPER + F7)
+hl.bind(mainMod .. " + SHIFT + g", function() hl.exec_cmd(home .. "/.config/hypr/scripts/gpu-switch.sh") end)
+hl.bind(mainMod .. " + F7",        function() hl.exec_cmd(home .. "/.config/hypr/scripts/gpu-switch.sh") end)
+
